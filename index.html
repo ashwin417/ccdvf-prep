@@ -54,13 +54,15 @@
     background:linear-gradient(var(--ink) 82%, transparent);
     border-bottom:1px solid var(--line);
   }
-  .brand{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; max-width:920px; margin:0 auto; padding:0 20px; }
+  .brand{ display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:920px; margin:0 auto; padding:0 20px; flex-wrap:wrap; }
+  .brand-row{ display:flex; align-items:center; gap:11px; }
+  .brand-mark{ flex:0 0 auto; }
   .brand h1{
-    font-family:'Fraunces',serif; font-weight:600; font-size:20px; margin:0;
-    letter-spacing:0.2px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:21px; margin:0;
+    letter-spacing:0.2px; line-height:1.1;
   }
   .brand h1 span{ color:var(--gold); font-style:italic; font-weight:500; }
-  .brand small{ font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:11px; }
+  .brand small{ font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:11px; display:block; margin-top:1px; }
 
   nav.tabs{
     display:flex; gap:2px; max-width:920px; margin:14px auto 0; padding:0 20px;
@@ -306,7 +308,7 @@
   /* ---- catalog / homepage ---- */
   #catalog-wrap{ max-width:1080px; }
   .cat-hero{ padding:38px 0 28px; }
-  .cat-hero h1{ font-family:'Fraunces',serif; font-size:32px; font-weight:600; margin:0 0 10px; }
+  .cat-hero h1{ font-family:'Fraunces',serif; font-size:32px; font-weight:600; margin:0 0 10px; display:flex; align-items:center; gap:13px; }
   .cat-hero h1 span{ color:var(--gold); font-style:italic; font-weight:500; }
   .cat-hero p{ color:var(--muted); font-size:14.5px; line-height:1.6; max-width:56ch; margin:0; }
   .cat-search{
@@ -579,11 +581,41 @@
 </head>
 <body>
 
+<button class="stuter-btn" id="stuter-btn" aria-label="Open Stuter, your certification companion" aria-haspopup="dialog">
+  <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+    <path d="M6 6.5 L11 11 L6 15.5" stroke="#181205" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="13.5" y="13" width="4.2" height="2.3" rx="0.4" fill="#181205"/>
+  </svg>
+</button>
+<div class="stuter-bubble" id="stuter-bubble" style="display:none;" role="status"></div>
+<div class="stuter-panel" id="stuter-panel" role="dialog" aria-label="Stuter — Your Certification Companion">
+  <div class="stuter-head">
+    <div><b>Stuter</b><small>Your Certification Companion</small></div>
+    <button class="stuter-close" id="stuter-close" aria-label="Close Stuter">✕</button>
+  </div>
+  <div class="stuter-body" id="stuter-body"></div>
+  <div class="stuter-quick" id="stuter-quick"></div>
+  <div class="stuter-fallback-note">Local assistant — matches your question against this platform's own course content. No external AI service is used, and nothing you type here is sent anywhere.</div>
+  <div class="stuter-inputrow">
+    <input type="text" id="stuter-input" placeholder="Ask Stuter…">
+    <button id="stuter-send">Ask</button>
+  </div>
+</div>
+
 <header class="top">
   <div class="brand">
     <button id="back-to-catalog" class="back-btn" style="display:none;">&larr; All certifications</button>
-    <h1 id="brand-title">Study<span> Terminal</span></h1>
-    <small id="brand-sub">Hands-on prep for AI &amp; tech certifications</small>
+    <div class="brand-row">
+      <svg class="brand-mark" width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="33" height="33" rx="9" fill="#171d29" stroke="#d9a441" stroke-width="1.5"/>
+        <path d="M10.5 11.5 L18 18 L10.5 24.5" stroke="#d9a441" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="21" y="21.3" width="7" height="3.2" rx="0.5" fill="#d9a441"/>
+      </svg>
+      <div>
+        <h1 id="brand-title">Study<span> Terminal</span></h1>
+        <small id="brand-sub">Hands-on prep for AI &amp; tech certifications</small>
+      </div>
+    </div>
   </div>
   <nav class="tabs" id="cert-tabs" style="display:none;">
     <button data-view="overview" class="active">01 · Overview</button>
@@ -2160,7 +2192,7 @@ function renderCatalog(){
 
   root.innerHTML =
     "<div class=\"cat-hero\">"+
-      "<h1>Study<span> Terminal</span></h1>"+
+      "<h1><svg width=\"38\" height=\"38\" viewBox=\"0 0 36 36\" aria-hidden=\"true\"><rect x=\"1.5\" y=\"1.5\" width=\"33\" height=\"33\" rx=\"9\" fill=\"#171d29\" stroke=\"#d9a441\" stroke-width=\"1.5\"/><path d=\"M10.5 11.5 L18 18 L10.5 24.5\" stroke=\"#d9a441\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"21\" y=\"21.3\" width=\"7\" height=\"3.2\" rx=\"0.5\" fill=\"#d9a441\"/></svg>Study<span> Terminal</span></h1>"+
       "<p>Hands-on preparation for AI and technology certifications \u2014 courses, deep lessons, interactive labs, and full practice exams. Independent and free; not affiliated with or endorsed by any certification provider.</p>"+
     "</div>"+
     "<div class=\"cat-search\"><input type=\"text\" id=\"cat-search-input\" placeholder=\"Search certifications\u2026\" value=\""+catalogState.query.replace(/"/g,"&quot;")+"\"></div>"+
@@ -3270,20 +3302,5 @@ renderProgressSummary();
 renderWeakTopics();
 stuterShowContextTip('catalog');
 </script>
-<button class="stuter-btn" id="stuter-btn" aria-label="Open Stuter, your certification companion" aria-haspopup="dialog">✦</button>
-<div class="stuter-bubble" id="stuter-bubble" style="display:none;" role="status"></div>
-<div class="stuter-panel" id="stuter-panel" role="dialog" aria-label="Stuter — Your Certification Companion">
-  <div class="stuter-head">
-    <div><b>Stuter</b><small>Your Certification Companion</small></div>
-    <button class="stuter-close" id="stuter-close" aria-label="Close Stuter">✕</button>
-  </div>
-  <div class="stuter-body" id="stuter-body"></div>
-  <div class="stuter-quick" id="stuter-quick"></div>
-  <div class="stuter-fallback-note">Local assistant — matches your question against this platform's own course content. No external AI service is used, and nothing you type here is sent anywhere.</div>
-  <div class="stuter-inputrow">
-    <input type="text" id="stuter-input" placeholder="Ask Stuter…">
-    <button id="stuter-send">Ask</button>
-  </div>
-</div>
 </body>
 </html>
