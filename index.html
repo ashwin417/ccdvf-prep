@@ -726,7 +726,7 @@ function finishExam(){
   const attempt = {
     date: new Date().toISOString(),
     total: examQuestions.length,
-    correct, pct, scaled, passed,
+    correct, pct, passed,
     domainTally
   };
   saveAttempt(attempt);
