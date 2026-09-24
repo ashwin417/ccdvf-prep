@@ -295,26 +295,249 @@
   .history-row .hd{ color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:11px; }
   .history-row .hs{ font-family:'JetBrains Mono',monospace; }
   .empty{ color:var(--muted); font-size:13.5px; padding:20px 0; }
-  .clearlink{ background:none; border:none; color:var(--muted); font-size:12px; text-decoration:underline; cursor:pointer; margin-top:16px; }
+  /* ---- back button / brand ---- */
+  .back-btn{
+    background:none; border:1px solid var(--line); color:var(--muted);
+    font-family:'JetBrains Mono',monospace; font-size:11px; padding:6px 10px; cursor:pointer;
+    margin-bottom:8px;
+  }
+  .back-btn:hover{ border-color:var(--gold); color:var(--gold); }
+
+  /* ---- catalog / homepage ---- */
+  #catalog-wrap{ max-width:1080px; }
+  .cat-hero{ padding:38px 0 28px; }
+  .cat-hero h1{ font-family:'Fraunces',serif; font-size:32px; font-weight:600; margin:0 0 10px; }
+  .cat-hero h1 span{ color:var(--gold); font-style:italic; font-weight:500; }
+  .cat-hero p{ color:var(--muted); font-size:14.5px; line-height:1.6; max-width:56ch; margin:0; }
+  .cat-search{
+    display:flex; gap:10px; margin:24px 0 18px; flex-wrap:wrap;
+  }
+  .cat-search input{
+    flex:1; min-width:200px; background:var(--ink-2); border:1px solid var(--line); color:var(--paper);
+    font-family:'Inter',sans-serif; font-size:14px; padding:11px 14px; outline:none;
+  }
+  .cat-search input:focus{ border-color:var(--gold-dim); }
+  .cat-filters{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+  .cat-chip{
+    background:var(--ink-2); border:1px solid var(--line); color:var(--muted);
+    font-family:'JetBrains Mono',monospace; font-size:11px; padding:7px 12px; cursor:pointer;
+  }
+  .cat-chip.active{ border-color:var(--gold); color:var(--gold); }
+  .cat-section-title{ font-family:'Fraunces',serif; font-size:19px; font-weight:600; margin:36px 0 14px; }
+  .cat-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px; }
+  .cat-card{
+    border:1px solid var(--line); background:var(--ink-2); padding:18px; display:flex; flex-direction:column; gap:10px;
+    cursor:pointer; transition:border-color .15s ease;
+  }
+  .cat-card:hover{ border-color:var(--gold-dim); }
+  .cat-card.soon{ cursor:default; opacity:0.72; }
+  .cat-card.soon:hover{ border-color:var(--line); }
+  .cat-card .cc-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .cat-card .cc-cat{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.4px; text-transform:uppercase; }
+  .cat-card .cc-badge{
+    font-family:'JetBrains Mono',monospace; font-size:9.5px; padding:3px 7px; border:1px solid var(--line); color:var(--muted); white-space:nowrap;
+  }
+  .cat-card .cc-badge.avail{ color:var(--good); border-color:var(--good); }
+  .cat-card .cc-badge.soon{ color:var(--muted); border-color:var(--line); }
+  .cat-card .cc-title{ font-family:'Fraunces',serif; font-size:17px; font-weight:600; line-height:1.3; }
+  .cat-card .cc-org{ font-size:11.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .cat-card .cc-desc{ font-size:12.5px; color:var(--muted); line-height:1.55; flex:1; }
+  .cat-card .cc-meta{ display:flex; gap:12px; font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .cat-card .cc-progress{ height:4px; background:var(--ink-3); margin-top:2px; }
+  .cat-card .cc-progress-fill{ height:100%; background:var(--gold); }
+  .cat-card .cc-cta{
+    margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--gold);
+  }
+  .cat-empty{ color:var(--muted); font-size:13px; padding:30px 0; text-align:center; }
+
+  /* ---- mode picker (practice & exam) ---- */
+  .mode-picker{ display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+  .mode-btn{
+    background:var(--ink-2); border:1px solid var(--line); color:var(--muted);
+    font-family:'JetBrains Mono',monospace; font-size:12px; padding:9px 14px; cursor:pointer;
+  }
+  .mode-btn.active{ border-color:var(--gold); color:var(--gold); background:var(--ink-3); }
+  .domain-check-grid{ display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+  .domain-check{
+    display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line); background:var(--ink-2); font-size:13px; cursor:pointer;
+  }
+  .domain-check input{ accent-color:var(--gold); width:16px; height:16px; flex:0 0 auto; }
+  .domain-check .dc-count{ margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
+  .inline-feedback{
+    margin-top:14px; padding:13px 14px; border-left:2px solid var(--gold-dim); background:var(--ink-2); font-size:13.5px; line-height:1.6; color:var(--muted);
+  }
+  .inline-feedback.ok{ border-left-color:var(--good); }
+  .inline-feedback.no{ border-left-color:var(--bad); }
+  .inline-feedback b{ color:var(--paper); }
+
+  /* ---- progress view ---- */
+  .prog-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:10px; }
+  @media (max-width:640px){ .prog-grid{ grid-template-columns:repeat(2,1fr); } }
+  .prog-cell{ background:var(--ink-2); padding:14px 12px; }
+  .prog-cell .pn{ font-family:'Fraunces',serif; font-size:22px; color:var(--gold); }
+  .prog-cell .pl{ font-size:10.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-top:4px; }
+  .weak-row{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  .weak-row .wpct{ font-family:'JetBrains Mono',monospace; color:var(--bad); }
+
+  /* ---- deep lessons ---- */
+  .lesson-card{ border:1px solid var(--line); background:var(--ink-2); margin-bottom:26px; }
+  .lesson-head{ padding:20px 20px 0; }
+  .lesson-head .ln{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); }
+  .lesson-head h3{ font-family:'Fraunces',serif; font-size:22px; margin:6px 0 14px; }
+  .lesson-obj{ background:var(--ink-3); padding:12px 14px; font-size:12.5px; color:var(--muted); margin:0 20px 18px; }
+  .lesson-obj b{ color:var(--paper); display:block; margin-bottom:5px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.4px; }
+  .lesson-obj ul{ margin:0; padding-left:16px; }
+  .lesson-body{ padding:0 20px 20px; }
+  .lesson-body h4{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--gold); letter-spacing:0.4px; margin:22px 0 10px; text-transform:uppercase; }
+  .lesson-body h4:first-child{ margin-top:0; }
+  .lesson-body p{ font-size:14px; line-height:1.7; color:var(--paper); margin:0 0 12px; }
+  .lesson-body p.muted{ color:var(--muted); font-size:13px; }
+  .lesson-code{
+    background:#0a0e08; border:1px solid #1f2e18; color:#7fd858; font-family:'JetBrains Mono',monospace;
+    font-size:12px; line-height:1.6; padding:14px 16px; overflow-x:auto; white-space:pre; margin:0 0 14px;
+  }
+  .lesson-mistakes{ margin:0 0 14px; padding-left:18px; }
+  .lesson-mistakes li{ font-size:13px; line-height:1.6; color:var(--paper); margin-bottom:8px; }
+  .lesson-mistakes li b{ color:var(--bad); }
+  .lesson-check{ background:var(--ink-3); border-left:2px solid var(--gold-dim); padding:14px 16px; margin:14px 0; }
+  .lesson-check .lc-q{ font-size:13.5px; font-weight:600; margin-bottom:10px; }
+  .lesson-check .lc-opts{ display:flex; flex-direction:column; gap:6px; }
+  .lesson-check .lc-opt{
+    text-align:left; background:var(--ink-2); border:1px solid var(--line); color:var(--paper); padding:9px 11px;
+    font-size:12.5px; cursor:pointer;
+  }
+  .lesson-check .lc-opt.correct{ border-color:var(--good); color:var(--good); }
+  .lesson-check .lc-opt.wrong{ border-color:var(--bad); color:var(--bad); }
+  .lesson-check .lc-fb{ margin-top:10px; font-size:12.5px; color:var(--muted); display:none; }
+  .lesson-check .lc-fb.show{ display:block; }
+  .lesson-complete-row{ display:flex; align-items:center; gap:12px; margin-top:20px; }
+  .lesson-complete-row .done-badge{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--good); display:none; }
+  .lesson-complete-row .done-badge.show{ display:inline; }
+
+  /* ---- clickable flow diagram ---- */
+  .flow-diagram{ display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+  .flow-step{
+    flex:1; min-width:130px; border:1px solid var(--line); background:var(--ink-3); padding:12px; cursor:pointer; text-align:center;
+  }
+  .flow-step.active{ border-color:var(--gold); background:var(--ink-2); }
+  .flow-step .fs-n{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); }
+  .flow-step .fs-t{ font-size:12.5px; margin-top:4px; font-weight:600; }
+  .flow-arrow{ display:flex; align-items:center; color:var(--muted); font-size:16px; }
+  @media (max-width:640px){ .flow-arrow{ display:none; } .flow-diagram{ flex-direction:column; } }
+  .flow-detail{ background:var(--ink-3); padding:14px 16px; font-size:13px; color:var(--muted); line-height:1.6; margin-top:4px; min-height:40px; }
+
+  /* ---- drag and drop exercise ---- */
+  .dnd-zone{ display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+  .dnd-item{
+    border:1px solid var(--line); background:var(--ink-2); padding:12px 14px; cursor:grab; font-size:13px;
+    display:flex; align-items:center; gap:10px; user-select:none;
+  }
+  .dnd-item.dragging{ opacity:0.4; }
+  .dnd-item .dnd-handle{ color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .dnd-feedback{ margin-top:12px; font-size:13px; color:var(--muted); }
+
+  /* ---- scenario labs ---- */
+  .scenario-picker{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  @media (max-width:640px){ .scenario-picker{ grid-template-columns:1fr; } }
+  .scenario-card{ border:1px solid var(--line); background:var(--ink-2); padding:14px 15px; cursor:pointer; }
+  .scenario-card:hover{ border-color:var(--gold-dim); }
+  .scenario-card .sc-tag{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold); }
+  .scenario-card .sc-t{ font-family:'Fraunces',serif; font-size:15.5px; font-weight:600; margin:5px 0 4px; }
+  .scenario-card .sc-d{ font-size:12px; color:var(--muted); line-height:1.5; }
+  .scenario-card .sc-status{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--good); margin-top:8px; display:none; }
+  .scenario-card .sc-status.show{ display:block; }
+
+  .lab-fs{ border:1px solid var(--line); background:var(--ink-2); margin-top:8px; }
+  .lab-fs-head{ padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .lab-fs-head h3{ font-family:'Fraunces',serif; font-size:17px; margin:0 0 4px; }
+  .lab-fs-head p{ font-size:12.5px; color:var(--muted); margin:0; }
+  .lab-fs-body{ display:grid; grid-template-columns:180px 1fr; min-height:260px; }
+  @media (max-width:640px){ .lab-fs-body{ grid-template-columns:1fr; } }
+  .lab-fs-tree{ border-right:1px solid var(--line); padding:10px 0; }
+  @media (max-width:640px){ .lab-fs-tree{ border-right:none; border-bottom:1px solid var(--line); display:flex; overflow-x:auto; padding:8px; } }
+  .lab-fs-file{
+    display:block; width:100%; text-align:left; background:none; border:none; color:var(--muted);
+    font-family:'JetBrains Mono',monospace; font-size:12px; padding:7px 14px; cursor:pointer; white-space:nowrap;
+  }
+  .lab-fs-file.active{ color:var(--gold); background:var(--ink-3); }
+  .lab-fs-editor{ padding:14px; display:flex; flex-direction:column; }
+  .lab-fs-editor textarea{
+    width:100%; flex:1; min-height:160px; background:#0a0e08; color:#e8ffe0; border:1px solid #1f2e18;
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; padding:12px; resize:vertical; outline:none; line-height:1.6;
+  }
+  .lab-fs-actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .lab-fs-output{ margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.7; white-space:pre-wrap; }
+  .lab-fs-output .ok-line{ color:var(--good); }
+  .lab-fs-output .bad-line{ color:var(--bad); }
+  .lab-fs-output .info-line{ color:var(--muted); }
+  .lab-fs-hint{ padding:10px 16px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); background:var(--ink-3); }
+
+  .guided-step{ border:1px solid var(--line); background:var(--ink-2); padding:16px; margin-top:8px; }
+  .guided-step .gs-prompt{ font-size:13.5px; line-height:1.6; margin-bottom:14px; white-space:pre-wrap; font-family:'JetBrains Mono',monospace; }
+  .guided-step .gs-opts{ display:flex; flex-direction:column; gap:8px; }
+  .guided-step .gs-opt{
+    text-align:left; background:var(--ink-3); border:1px solid var(--line); color:var(--paper); padding:11px 13px; font-size:13px; cursor:pointer;
+  }
+  .guided-step .gs-opt:hover{ border-color:var(--gold-dim); }
+  .guided-step .gs-fb{ margin-top:14px; padding:12px 14px; font-size:13px; line-height:1.6; display:none; }
+  .guided-step .gs-fb.show{ display:block; }
+  .guided-step .gs-fb.ok{ background:rgba(95,174,126,0.08); border-left:2px solid var(--good); color:var(--paper); }
+  .guided-step .gs-fb.no{ background:rgba(201,105,79,0.08); border-left:2px solid var(--bad); color:var(--paper); }
+
+  /* ---- claude desktop simulation ---- */
+  .desktop-chrome{ border:1px solid var(--line); background:var(--ink-2); overflow:hidden; }
+  .desktop-titlebar{ background:var(--ink-3); padding:9px 14px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); border-bottom:1px solid var(--line); }
+  .desktop-body{ display:grid; grid-template-columns:220px 1fr; min-height:420px; }
+  @media (max-width:700px){ .desktop-body{ grid-template-columns:1fr; } }
+  .desktop-sidebar{ border-right:1px solid var(--line); padding:14px 0; }
+  @media (max-width:700px){ .desktop-sidebar{ border-right:none; border-bottom:1px solid var(--line); } }
+  .desktop-sidebar h5{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.4px; padding:0 14px; margin:14px 0 8px; }
+  .desktop-sidebar h5:first-child{ margin-top:0; }
+  .desktop-connector{ padding:9px 14px; font-size:12.5px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
+  .desktop-connector:hover{ background:var(--ink-3); }
+  .desktop-connector .dc-dot{ width:7px; height:7px; border-radius:50%; background:var(--muted); flex:0 0 auto; }
+  .desktop-connector .dc-dot.on{ background:var(--good); }
+  .desktop-connector .dc-dot.err{ background:var(--bad); }
+  .desktop-main{ padding:18px; display:flex; flex-direction:column; }
+  .desktop-lab-list{ display:flex; flex-direction:column; gap:8px; }
+  .desktop-lab-card{ border:1px solid var(--line); background:var(--ink-3); padding:13px 15px; cursor:pointer; }
+  .desktop-lab-card:hover{ border-color:var(--gold-dim); }
+  .desktop-lab-card .dl-t{ font-weight:600; font-size:13.5px; }
+  .desktop-lab-card .dl-d{ font-size:12px; color:var(--muted); margin-top:4px; }
+  .desktop-convo{ flex:1; display:flex; flex-direction:column; gap:10px; overflow-y:auto; max-height:320px; padding:4px; }
+  .desktop-msg{ font-size:13px; line-height:1.6; padding:10px 12px; max-width:85%; }
+  .desktop-msg.user{ background:var(--ink-3); align-self:flex-end; }
+  .desktop-msg.assistant{ background:var(--ink-3); border-left:2px solid var(--gold-dim); align-self:flex-start; }
+  .desktop-msg.tool{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--gold); background:none; border:1px dashed var(--line); align-self:flex-start; }
+  .desktop-composer{ display:flex; gap:8px; margin-top:12px; }
+  .desktop-composer input{ flex:1; background:var(--ink-3); border:1px solid var(--line); color:var(--paper); padding:10px 12px; font-size:13px; outline:none; }
+  .desktop-config{ background:#0a0e08; color:#e8ffe0; border:1px solid #1f2e18; font-family:'JetBrains Mono',monospace; font-size:12px; padding:12px; width:100%; min-height:120px; margin:10px 0; }
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="brand">
-    <h1>CCDV-F <span>Prep</span></h1>
-    <small>Claude Certified Developer — Foundations</small>
+    <button id="back-to-catalog" class="back-btn" style="display:none;">&larr; All certifications</button>
+    <h1 id="brand-title">Study<span> Terminal</span></h1>
+    <small id="brand-sub">Hands-on prep for AI &amp; tech certifications</small>
   </div>
-  <nav class="tabs">
+  <nav class="tabs" id="cert-tabs" style="display:none;">
     <button data-view="overview" class="active">01 · Overview</button>
     <button data-view="course">02 · Course</button>
-    <button data-view="labs">03 · Labs</button>
-    <button data-view="exam">04 · Mock Exam</button>
-    <button data-view="history">05 · History</button>
+    <button data-view="lessons">03 · Deep Lessons</button>
+    <button data-view="labs">04 · Labs</button>
+    <button data-view="desktop">05 · Desktop Sim</button>
+    <button data-view="exam">06 · Practice &amp; Exam</button>
+    <button data-view="history">07 · Progress</button>
   </nav>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="catalog-wrap">
+  <div id="catalog-root"></div>
+</div>
+
+<div class="wrap" id="cert-wrap" style="display:none;">
 
   <!-- OVERVIEW -->
   <section class="view active" id="view-overview">
@@ -334,7 +557,7 @@
     <div id="domain-weights"></div>
 
     <div class="note">
-      <b>Where this comes from:</b> the exam format and domain weights above are compiled from public exam-guide writeups, not an official Anthropic page — treat them as a strong study prior, not a guarantee. Ashwin's own notes flag that CCDV-F registration is gated to Claude Partner Network organizations, so worth confirming with UST whether they're a partner or will sponsor access before banking on a self-service signup. Anthropic Academy's free Skilljar courses (Claude 101, Building with the Claude API, Intro to MCP, Claude Code Developer Training, Agent Skills) map closely to the domains below.
+      <b>Where this comes from:</b> the exam format and domain weights above are compiled from public exam-guide writeups, not an official Anthropic page — treat them as a strong study prior, not a guarantee. Registration for the real exam is gated to Claude Partner Network organizations rather than open to individual signups, so if you're pursuing the actual certification, it's worth checking with your employer whether they're a partner or can sponsor access before relying on self-service signup. Anthropic Academy's free Skilljar courses (Claude 101, Building with the Claude API, Intro to MCP, Claude Code Developer Training, Agent Skills) map closely to the domains below.
     </div>
 
     <div class="note">
@@ -347,6 +570,13 @@
     <h2 class="section-title">The course</h2>
     <p class="lede">Every domain, explained twice: once as a plain-language story with no jargon, then as a quick-reference cheat sheet, then as the questions people usually get stuck on while reading.</p>
     <div class="course-list" id="course-list"></div>
+  </section>
+
+  <!-- DEEP LESSONS -->
+  <section class="view" id="view-lessons">
+    <h2 class="section-title">Deep lessons</h2>
+    <p class="lede">Full walkthroughs on the topics worth understanding cold — objectives, the beginner version, the technical version, a worked example, common mistakes, and a quick check. These go well beyond the Course tab on a smaller set of flagship topics.</p>
+    <div id="lessons-list"></div>
   </section>
 
   <!-- LABS -->
@@ -370,16 +600,45 @@
         <input type="text" id="term-input" class="term-input" placeholder="try: fix the bug in checkout.js" autocomplete="off" autocapitalize="off" spellcheck="false">
       </div>
     </div>
+
+    <h2 class="section-title" style="font-size:20px; margin-top:40px;">Hands-on scenario labs</h2>
+    <p class="lede">Five realistic scenarios. Two are fully interactive — you edit real (simulated) files and re-run tests against your own change. The other three are guided diagnose-and-decide challenges.</p>
+    <div class="scenario-picker" id="scenario-picker"></div>
+    <div id="scenario-panel"></div>
+  </section>
+
+  <!-- DESKTOP SIM -->
+  <section class="view" id="view-desktop">
+    <h2 class="section-title">Claude Desktop simulation</h2>
+    <p class="lede">A simulated desktop-client interface for learning MCP connectors, tool permissions, and file context — not the real Claude Desktop app, and nothing here makes any real connection.</p>
+    <div id="desktop-root"></div>
   </section>
 
   <!-- EXAM -->
   <section class="view" id="view-exam">
     <div id="exam-setup">
-      <h2 class="section-title">Mock exam</h2>
-      <p class="lede">Drawn fresh from a 100-question bank every time — domain mix, question order, and answer-option order are all reshuffled on each attempt, so no two runs look the same.</p>
-      <div class="setup-grid" id="length-cards"></div>
-      <label class="toggle-row"><input type="checkbox" id="timed-toggle" checked> Timed (roughly 2.25 min/question, like the real 120-min/53-question pace)</label>
-      <button class="btn" id="start-exam-btn">Start exam →</button>
+      <h2 class="section-title">Practice &amp; exam</h2>
+      <p class="lede">124-question bank, all independently written for this platform — not real exam items. Pick a mode below.</p>
+      <div class="mode-picker" id="mode-picker"></div>
+
+      <div id="mode-full">
+        <p class="lede" style="margin-bottom:14px;">Drawn fresh every time — domain mix, question order, and answer-option order are all reshuffled on each attempt, so no two runs look the same.</p>
+        <div class="setup-grid" id="length-cards"></div>
+        <label class="toggle-row"><input type="checkbox" id="timed-toggle" checked> Timed (roughly 2.25 min/question, like the real 120-min/53-question pace)</label>
+        <button class="btn" id="start-exam-btn">Start exam →</button>
+      </div>
+
+      <div id="mode-domain" style="display:none;">
+        <p class="lede" style="margin-bottom:14px;">Pick one or more domains to drill. Untimed, and every question is scored on the spot with an explanation.</p>
+        <div class="domain-check-grid" id="domain-check-grid"></div>
+        <button class="btn" id="start-domain-btn">Start domain practice →</button>
+      </div>
+
+      <div id="mode-revise" style="display:none;">
+        <p class="lede" style="margin-bottom:14px;">Only questions you've gotten wrong before, drawn from your attempt history on this device.</p>
+        <div id="revise-summary"></div>
+        <button class="btn" id="start-revise-btn">Revise missed questions →</button>
+      </div>
     </div>
 
     <div id="exam-quiz" style="display:none;">
@@ -389,6 +648,7 @@
       </div>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       <div class="qcard" id="qcard"></div>
+      <div id="inline-feedback" class="inline-feedback" style="display:none;"></div>
       <div class="qnav">
         <button class="btn ghost" id="prev-btn">← Back</button>
         <button class="btn" id="next-btn">Next →</button>
@@ -398,12 +658,17 @@
     <div id="exam-results" style="display:none;"></div>
   </section>
 
-  <!-- HISTORY -->
+  <!-- HISTORY / PROGRESS -->
   <section class="view" id="view-history">
-    <h2 class="section-title">Attempt history</h2>
-    <p class="lede">Stored on this device only.</p>
+    <h2 class="section-title">Progress</h2>
+    <p class="lede">Everything below is stored on this device only — nothing is sent anywhere, and nothing is marked done just because you opened it.</p>
+    <div id="progress-summary"></div>
+    <h2 class="section-title" style="font-size:18px; margin-top:32px;">Weak topics</h2>
+    <p class="lede" style="margin-bottom:14px;">Based on your actual practice and exam attempts.</p>
+    <div id="weak-topics"></div>
+    <h2 class="section-title" style="font-size:18px; margin-top:32px;">Attempt history</h2>
     <div id="history-list"></div>
-    <button class="clearlink" id="clear-history">Clear history</button>
+    <button class="clearlink" id="clear-history">Reset all progress on this device</button>
   </section>
 
 </div>
@@ -548,11 +813,12 @@ const Q = [
 {d:"CC", q:"A team's CLAUDE.md has grown to several thousand words of exhaustive detail, and sessions now feel slower to start, sometimes missing instructions buried deep in the file. What's the likely issue?", o:["CLAUDE.md is understood to have a hard 500-word limit, with anything past that silently dropped","CLAUDE.md gets read into context every session, so an overly long file competes for the same attention budget as everything else","The file most likely needs to be converted into a custom slash command instead of remaining CLAUDE.md","Claude Code is designed to only actually read the first paragraph of any CLAUDE.md file"], c:1, e:"CLAUDE.md's content becomes part of the session's context like anything else \u2014 a bloated file isn't free, and trimming it to what's genuinely load-bearing tends to help more than piling on further detail."},
 {d:"ETD", q:"After a prompt change, an automated eval score improves, but real users start complaining more. The eval set turns out to be built entirely from easy, well-formed inputs. What does this reveal?", o:["The eval framework itself must be fundamentally broken and needs to be entirely replaced","The eval set doesn't represent real user input, so a benchmark win doesn't reliably predict a production win","User complaints of this kind are usually unrelated to prompt quality and can generally be discounted","The underlying model must have been silently downgraded by the provider without notice"], c:1, e:"An eval is only as useful as how well it represents the real distribution of inputs \u2014 a benchmark built entirely from easy cases can show a clear win while production, full of messier real inputs, gets worse."},
 ];
+Q.forEach((q,i)=>{ q.id = i; });
 
 /* ---------------- STATE ---------------- */
 let examQuestions = [];
 let examAnswers = [];
-let examConfig = { total: 15, timed: true };
+let examConfig = { total: 15, timed: true, mode: 'full', immediateFeedback: false };
 let currentIndex = 0;
 let timerInterval = null;
 let secondsLeft = 0;
@@ -570,6 +836,18 @@ function saveAttempt(attempt){
     h.unshift(attempt);
     localStorage.setItem('ccdvf_history', JSON.stringify(h.slice(0,50)));
   }catch(e){ /* storage unavailable — continue without persistence */ }
+}
+function getMissedIds(){
+  try{ return JSON.parse(localStorage.getItem('ccdvf_missed')||'[]'); }catch(e){ return []; }
+}
+function updateMissedIds(questions, answers){
+  try{
+    const missed = new Set(getMissedIds());
+    questions.forEach((q,i)=>{
+      if(answers[i]===q.c) missed.delete(q.id); else missed.add(q.id);
+    });
+    localStorage.setItem('ccdvf_missed', JSON.stringify(Array.from(missed)));
+  }catch(e){}
 }
 
 /* ---------------- OVERVIEW ---------------- */
@@ -1244,6 +1522,79 @@ function renderLengthCards(){
   });
 }
 
+/* ---------------- PRACTICE MODES ---------------- */
+const MODES = [
+  {id:'full', label:'Full mock exam'},
+  {id:'domain', label:'Domain practice'},
+  {id:'revise', label:'Revise mistakes'}
+];
+function renderModePicker(){
+  const el = document.getElementById('mode-picker');
+  el.innerHTML = MODES.map(m=>`<button class="mode-btn ${examConfig.mode===m.id?'active':''}" data-mode="${m.id}">${m.label}</button>`).join('');
+  el.querySelectorAll('.mode-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      examConfig.mode = btn.dataset.mode;
+      el.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('mode-full').style.display = examConfig.mode==='full' ? 'block':'none';
+      document.getElementById('mode-domain').style.display = examConfig.mode==='domain' ? 'block':'none';
+      document.getElementById('mode-revise').style.display = examConfig.mode==='revise' ? 'block':'none';
+      if(examConfig.mode==='domain') renderDomainCheckGrid();
+      if(examConfig.mode==='revise') renderReviseSummary();
+    });
+  });
+}
+function renderDomainCheckGrid(){
+  const el = document.getElementById('domain-check-grid');
+  el.innerHTML = DOMAINS.map(d=>{
+    const count = Q.filter(q=>q.d===d.key).length;
+    return `<label class="domain-check">
+      <input type="checkbox" value="${d.key}" checked>
+      <span>${d.name}</span>
+      <span class="dc-count">${count} questions</span>
+    </label>`;
+  }).join('');
+}
+function renderReviseSummary(){
+  const el = document.getElementById('revise-summary');
+  const count = getMissedIds().length;
+  const btn = document.getElementById('start-revise-btn');
+  if(count===0){
+    el.innerHTML = `<p class="lede">Nothing to revise yet — questions you get wrong in any mode get added here automatically.</p>`;
+    btn.disabled = true;
+  } else {
+    el.innerHTML = `<p class="lede">${count} question${count===1?'':'s'} currently in your missed pile.</p>`;
+    btn.disabled = false;
+  }
+}
+document.getElementById('start-domain-btn').addEventListener('click', ()=>{
+  const checked = Array.from(document.querySelectorAll('#domain-check-grid input:checked')).map(i=>i.value);
+  if(checked.length===0) return;
+  examConfig.timed = false;
+  examConfig.immediateFeedback = true;
+  examQuestions = buildDomainPracticeSet(checked);
+  examAnswers = new Array(examQuestions.length).fill(null);
+  currentIndex = 0;
+  document.getElementById('exam-setup').style.display='none';
+  document.getElementById('exam-results').style.display='none';
+  document.getElementById('exam-quiz').style.display='block';
+  document.getElementById('timer').textContent='';
+  renderQuestion();
+});
+document.getElementById('start-revise-btn').addEventListener('click', ()=>{
+  examConfig.timed = false;
+  examConfig.immediateFeedback = true;
+  examQuestions = buildReviseSet();
+  if(examQuestions.length===0) return;
+  examAnswers = new Array(examQuestions.length).fill(null);
+  currentIndex = 0;
+  document.getElementById('exam-setup').style.display='none';
+  document.getElementById('exam-results').style.display='none';
+  document.getElementById('exam-quiz').style.display='block';
+  document.getElementById('timer').textContent='';
+  renderQuestion();
+});
+
 function buildExamSet(total){
   // proportional draw per domain, rounded, then trimmed/filled to exact total —
   // pool and order are freshly shuffled on every call, so every attempt differs.
@@ -1275,6 +1626,7 @@ function shuffle(arr){
 function shuffleOptions(q){
   const order = shuffle([0,1,2,3]);
   return {
+    id: q.id,
     d: q.d,
     q: q.q,
     o: order.map(i=>q.o[i]),
@@ -1283,7 +1635,19 @@ function shuffleOptions(q){
   };
 }
 
+function buildDomainPracticeSet(domainKeys){
+  const pool = shuffle(Q.filter(q=>domainKeys.includes(q.d)).slice());
+  return pool.map(shuffleOptions);
+}
+function buildReviseSet(){
+  const missed = new Set(getMissedIds());
+  const pool = shuffle(Q.filter(q=>missed.has(q.id)).slice());
+  return pool.map(shuffleOptions);
+}
+
 document.getElementById('start-exam-btn').addEventListener('click', ()=>{
+  examConfig.mode = 'full';
+  examConfig.immediateFeedback = false;
   examConfig.timed = document.getElementById('timed-toggle').checked;
   examQuestions = buildExamSet(examConfig.total);
   examAnswers = new Array(examQuestions.length).fill(null);
@@ -1326,27 +1690,46 @@ function renderQuestion(){
   document.getElementById('progress-fill').style.width = ((currentIndex)/examQuestions.length*100)+'%';
 
   const picked = examAnswers[currentIndex];
+  const answered = examConfig.immediateFeedback && picked !== null;
   const card = document.getElementById('qcard');
   card.innerHTML = `
     <div class="qdomain">${domainName.toUpperCase()}</div>
     <div class="qtext">${q.q}</div>
     <div id="choices">
-      ${q.o.map((opt,i)=>`
-        <label class="choice ${picked===i?'picked':''}" data-i="${i}">
-          <input type="radio" name="choice" ${picked===i?'checked':''}>
+      ${q.o.map((opt,i)=>{
+        let cls = picked===i ? 'picked' : '';
+        if(answered){
+          if(i===q.c) cls += ' correct';
+          else if(i===picked) cls += ' wrong';
+        }
+        return `
+        <label class="choice ${cls}" data-i="${i}">
+          <input type="radio" name="choice" ${picked===i?'checked':''} ${answered?'disabled':''}>
           <span>${opt}</span>
         </label>
-      `).join('')}
+      `;}).join('')}
     </div>
   `;
+  const fb = document.getElementById('inline-feedback');
+  if(answered){
+    const ok = picked===q.c;
+    fb.style.display = 'block';
+    fb.className = 'inline-feedback ' + (ok?'ok':'no');
+    fb.innerHTML = `<b>${ok?'Correct.':'Not quite.'}</b> ${q.e}`;
+  } else {
+    fb.style.display = 'none';
+    fb.innerHTML = '';
+  }
   card.querySelectorAll('.choice').forEach(el=>{
     el.addEventListener('click', ()=>{
+      if(examConfig.immediateFeedback && examAnswers[currentIndex] !== null) return;
       examAnswers[currentIndex] = parseInt(el.dataset.i,10);
       renderQuestion();
     });
   });
 
   document.getElementById('prev-btn').disabled = currentIndex===0;
+  document.getElementById('next-btn').disabled = examConfig.immediateFeedback && picked===null;
   document.getElementById('next-btn').textContent = currentIndex===examQuestions.length-1 ? 'Finish →' : 'Next →';
 }
 
@@ -1376,6 +1759,7 @@ function finishExam(){
     domainTally[q.d].total++;
     if(examAnswers[i]===q.c){ correct++; domainTally[q.d].correct++; }
   });
+  updateMissedIds(examQuestions, examAnswers);
 
   const pct = Math.round((correct/examQuestions.length)*100);
   const passed = pct >= 72; // rough study proxy only — see note in results markup
@@ -1384,6 +1768,7 @@ function finishExam(){
     date: new Date().toISOString(),
     total: examQuestions.length,
     correct, pct, passed,
+    mode: examConfig.mode,
     domainTally
   };
   saveAttempt(attempt);
@@ -1448,18 +1833,80 @@ function renderHistory(){
     el.innerHTML = '<div class="empty">No attempts yet — take a mock exam to see your history here.</div>';
     return;
   }
+  const modeLabel = {full:'Full mock', domain:'Domain practice', revise:'Revise mistakes'};
   el.innerHTML = h.map(a=>{
     const dt = new Date(a.date);
     const dateStr = dt.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})+' '+dt.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+    const label = modeLabel[a.mode] || 'Full mock';
     return `<div class="history-row">
-      <div><div>${a.correct}/${a.total} correct</div><div class="hd">${dateStr}</div></div>
+      <div><div>${a.correct}/${a.total} correct <span style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10.5px;">${label}</span></div><div class="hd">${dateStr}</div></div>
       <div class="hs" style="color:${a.passed?'var(--good)':'var(--bad)'}">${a.pct}% ${a.passed?'PASS':'FAIL'}</div>
     </div>`;
   }).join('');
 }
+
+function renderProgressSummary(){
+  const el = document.getElementById('progress-summary');
+  const h = loadHistory();
+  const lessonsDone = getCompletedLessons().length;
+  const lessonsTotal = LESSONS.length;
+  const labsDone = getCompletedLabs().length;
+  const labsTotal = SCENARIO_LABS.length + DESKTOP_LABS.length;
+  el.innerHTML = `
+    <div class="prog-grid">
+      <div class="prog-cell"><div class="pn">1</div><div class="pl">certification explored</div></div>
+      <div class="prog-cell"><div class="pn">${lessonsDone}/${lessonsTotal}</div><div class="pl">deep lessons completed</div></div>
+      <div class="prog-cell"><div class="pn">${labsDone}/${labsTotal}</div><div class="pl">labs completed</div></div>
+      <div class="prog-cell"><div class="pn">${h.length}</div><div class="pl">practice &amp; exam attempts</div></div>
+    </div>
+  `;
+}
+
+function renderWeakTopics(){
+  const el = document.getElementById('weak-topics');
+  const h = loadHistory();
+  if(h.length===0){
+    el.innerHTML = '<div class="empty">Take a practice session or mock exam to see this.</div>';
+    return;
+  }
+  const agg = {};
+  DOMAINS.forEach(d=> agg[d.key] = {correct:0,total:0});
+  h.forEach(a=>{
+    if(!a.domainTally) return;
+    Object.keys(a.domainTally).forEach(k=>{
+      if(!agg[k]) return;
+      agg[k].correct += a.domainTally[k].correct;
+      agg[k].total += a.domainTally[k].total;
+    });
+  });
+  const rows = DOMAINS
+    .map(d=>({d, t: agg[d.key]}))
+    .filter(x=>x.t.total >= 2)
+    .map(x=>({name:x.d.name, pct: Math.round((x.t.correct/x.t.total)*100), total:x.t.total}))
+    .sort((a,b)=>a.pct-b.pct)
+    .slice(0,5);
+  if(rows.length===0){
+    el.innerHTML = '<div class="empty">Answer a few more questions per domain to see this.</div>';
+    return;
+  }
+  el.innerHTML = rows.map(r=>`
+    <div class="weak-row"><div>${r.name}</div><div class="wpct">${r.pct}% <span style="color:var(--muted);">(${r.total} seen)</span></div></div>
+  `).join('');
+}
+
 document.getElementById('clear-history').addEventListener('click', ()=>{
-  try{ localStorage.removeItem('ccdvf_history'); }catch(e){}
+  try{
+    localStorage.removeItem('ccdvf_history');
+    localStorage.removeItem('ccdvf_missed');
+    localStorage.removeItem('ccdvf_lessons_done');
+    localStorage.removeItem('ccdvf_labs_done');
+  }catch(e){}
   renderHistory();
+  renderProgressSummary();
+  renderWeakTopics();
+  renderLessons();
+  renderScenarioPicker();
+  renderDesktopRoot();
 });
 
 /* ---------------- NAV ---------------- */
@@ -1469,10 +1916,857 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
     btn.classList.add('active');
     document.querySelectorAll('section.view').forEach(v=>v.classList.remove('active'));
     document.getElementById('view-'+btn.dataset.view).classList.add('active');
-    if(btn.dataset.view==='history') renderHistory();
+    if(btn.dataset.view==='history'){ renderHistory(); renderProgressSummary(); renderWeakTopics(); }
+    if(btn.dataset.view==='exam'){ renderReviseSummary(); }
     window.scrollTo({top:0,behavior:'instant'});
   });
 });
+
+
+const CERTS = [
+  {
+    id:"ccdvf",
+    status:"available",
+    name:"Claude Certified Developer \u2014 Foundations",
+    shortName:"CCDV-F",
+    org:"Anthropic",
+    category:"AI Application Development",
+    difficulty:"Foundational",
+    estTime:"15\u201325 hrs",
+    desc:"Build, integrate, and ship production applications and agents on Claude \u2014 the Messages API, tool use, MCP, and Claude Code.",
+  },
+];
+
+const COMING_SOON = [
+  {name:"Claude Certified Architect \u2014 Foundations", org:"Anthropic", category:"AI Application Development", desc:"Architecture-level decisions for production Claude systems: model selection, cost, governance, and integration patterns."},
+  {name:"AI & Machine Learning Fundamentals", org:"various", category:"AI and Machine Learning", desc:"Core ML concepts, model evaluation, and the vocabulary that shows up across most AI vendor certifications."},
+  {name:"Cloud Practitioner Track", org:"various", category:"Cloud Computing", desc:"Foundational cloud computing concepts \u2014 compute, storage, networking, and shared-responsibility security models."},
+  {name:"Security Fundamentals Track", org:"various", category:"Cybersecurity", desc:"Application and infrastructure security basics: threat modeling, common vulnerabilities, and defensive design."},
+  {name:"Software Engineering Practices Track", org:"various", category:"Software Development", desc:"Version control, testing strategy, code review, and the engineering habits most dev-focused certifications assume."},
+  {name:"DevOps & CI/CD Track", org:"various", category:"DevOps and Infrastructure", desc:"Build pipelines, deployment strategy, and the operational practices behind reliable software delivery."},
+];
+
+/* ---------------- CATALOG / MULTI-CERT SHELL ---------------- */
+let catalogState = { query: "", category: "all" };
+
+function certProgressPct(certId){
+  try{
+    const h = loadHistory();
+    if(h.length===0) return 0;
+    const lessonsTotal = LESSONS.length;
+    const lessonsDone = getCompletedLessons().length;
+    const labsTotal = SCENARIO_LABS.length;
+    const labsDone = getCompletedLabs().length;
+    const examDone = h.length>0 ? 1 : 0;
+    const total = lessonsTotal + labsTotal + 1;
+    const done = lessonsDone + labsDone + examDone;
+    return Math.round((done/total)*100);
+  }catch(e){ return 0; }
+}
+
+function renderCatalog(){
+  const root = document.getElementById("catalog-root");
+  const categories = ["all", ...Array.from(new Set(CERTS.map(c=>c.category).concat(COMING_SOON.map(c=>c.category))))];
+
+  const q = catalogState.query.toLowerCase();
+  const matchesQuery = (c)=>{
+    if(!q) return true;
+    return (c.name+" "+c.org+" "+c.category+" "+(c.desc||"")).toLowerCase().includes(q);
+  };
+  const matchesCat = (c)=> catalogState.category==="all" || c.category===catalogState.category;
+
+  const availableFiltered = CERTS.filter(c=>matchesQuery(c) && matchesCat(c));
+  const soonFiltered = COMING_SOON.filter(c=>matchesQuery(c) && matchesCat(c));
+
+  const chipHtml = categories.map(cat=>(
+    "<button class=\"cat-chip"+(catalogState.category===cat?" active":"")+"\" data-cat=\""+cat.replace(/"/g,"&quot;")+"\">"+(cat==="all"?"All categories":cat)+"</button>"
+  )).join("");
+
+  const availHtml = availableFiltered.length ? availableFiltered.map(c=>{
+    const pct = certProgressPct(c.id);
+    return (
+      "<div class=\"cat-card\" data-cert=\""+c.id+"\">"+
+        "<div class=\"cc-top\"><span class=\"cc-cat\">"+c.category+"</span><span class=\"cc-badge avail\">Available</span></div>"+
+        "<div class=\"cc-title\">"+c.name+"</div>"+
+        "<div class=\"cc-org\">"+c.org+" &middot; "+c.difficulty+"</div>"+
+        "<div class=\"cc-desc\">"+c.desc+"</div>"+
+        "<div class=\"cc-meta\"><span>&#9201; "+c.estTime+"</span></div>"+
+        (pct>0 ? "<div class=\"cc-progress\"><div class=\"cc-progress-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"cc-meta\">"+pct+"% explored</div>" : "")+
+        "<div class=\"cc-cta\">Start learning &rarr;</div>"+
+      "</div>"
+    );
+  }).join("") : "<div class=\"cat-empty\">No available certifications match that search.</div>";
+
+  const soonHtml = soonFiltered.length ? soonFiltered.map(c=>(
+    "<div class=\"cat-card soon\">"+
+      "<div class=\"cc-top\"><span class=\"cc-cat\">"+c.category+"</span><span class=\"cc-badge soon\">Coming soon</span></div>"+
+      "<div class=\"cc-title\">"+c.name+"</div>"+
+      "<div class=\"cc-org\">"+c.org+"</div>"+
+      "<div class=\"cc-desc\">"+c.desc+"</div>"+
+    "</div>"
+  )).join("") : "<div class=\"cat-empty\">No upcoming certifications match that search.</div>";
+
+  root.innerHTML =
+    "<div class=\"cat-hero\">"+
+      "<h1>Study<span> Terminal</span></h1>"+
+      "<p>Hands-on preparation for AI and technology certifications \u2014 courses, deep lessons, interactive labs, and full practice exams. Independent and free; not affiliated with or endorsed by any certification provider.</p>"+
+    "</div>"+
+    "<div class=\"cat-search\"><input type=\"text\" id=\"cat-search-input\" placeholder=\"Search certifications\u2026\" value=\""+catalogState.query.replace(/"/g,"&quot;")+"\"></div>"+
+    "<div class=\"cat-filters\">"+chipHtml+"</div>"+
+    "<div class=\"cat-section-title\">Available now</div>"+
+    "<div class=\"cat-grid\">"+availHtml+"</div>"+
+    "<div class=\"cat-section-title\">More certifications coming soon</div>"+
+    "<div class=\"cat-grid\">"+soonHtml+"</div>";
+
+  document.getElementById("cat-search-input").addEventListener("input", (e)=>{
+    catalogState.query = e.target.value;
+    renderCatalog();
+    document.getElementById("cat-search-input").focus();
+    const val = document.getElementById("cat-search-input").value;
+    document.getElementById("cat-search-input").setSelectionRange(val.length, val.length);
+  });
+  root.querySelectorAll(".cat-chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      catalogState.category = chip.dataset.cat;
+      renderCatalog();
+    });
+  });
+  root.querySelectorAll(".cat-card[data-cert]").forEach(card=>{
+    card.addEventListener("click", ()=> enterCert(card.dataset.cert));
+  });
+}
+
+function enterCert(certId){
+  const cert = CERTS.find(c=>c.id===certId);
+  if(!cert) return;
+  document.getElementById("catalog-wrap").style.display = "none";
+  document.getElementById("cert-wrap").style.display = "block";
+  document.getElementById("back-to-catalog").style.display = "inline-block";
+  document.getElementById("cert-tabs").style.display = "flex";
+  document.getElementById("brand-title").textContent = cert.shortName;
+  document.getElementById("brand-sub").textContent = cert.name;
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+function backToCatalog(){
+  document.getElementById("catalog-wrap").style.display = "block";
+  document.getElementById("cert-wrap").style.display = "none";
+  document.getElementById("back-to-catalog").style.display = "none";
+  document.getElementById("cert-tabs").style.display = "none";
+  document.getElementById("brand-title").innerHTML = "Study<span> Terminal</span>";
+  document.getElementById("brand-sub").textContent = "Hands-on prep for AI & tech certifications";
+  renderCatalog();
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+document.getElementById("back-to-catalog").addEventListener("click", backToCatalog);
+
+
+
+const LESSONS = [{"id": "messages-api", "title": "The Messages API, Deeply", "tag": "Applications & Integration", "objectives": ["Explain why the Messages API is stateless and what that means for your application code", "Read a request and response and identify every required and optional field", "Correctly interpret every stop_reason value instead of treating them all the same", "Build a minimal, correct request from scratch without copying a template"], "sections": [{"h": "Why this exists", "body": "Every AI product needs one basic thing: a reliable way to send a conversation to the model and get a reply back. The Messages API is that contract. It doesn't try to be clever about remembering your users, managing sessions, or guessing what you meant \u2014 it does one job, predictably, so you can build anything on top of it: a chatbot, a batch pipeline, an autonomous agent, a code assistant. The price of that predictability is that YOUR application has to do the bookkeeping the API deliberately doesn't do."}, {"h": "The beginner version", "body": "Think of it like sending a letter, not making a phone call. Every letter has to contain everything the reader needs to understand it, because the reader has no memory of any letter you sent before. Your \"letter\" (the request) has a return address and instructions for the reader (the system prompt), the full history of the conversation so far (the messages array), and a note saying how long the reply is allowed to be (max_tokens). The reply comes back with the answer, plus a note explaining why the reply stopped where it did (stop_reason)."}, {"h": "The technical version", "body": "A request is a POST to /v1/messages with, at minimum, a model and max_tokens, plus a messages array of alternating user/assistant turns. The system prompt is a separate top-level string, never a message with role \"system\" \u2014 that's a common source of confusion for anyone coming from other APIs. The response includes an id, the model actually used, a content array (one or more content blocks \u2014 usually text, sometimes tool_use), a stop_reason, and usage (token counts for billing and monitoring).", "code": "POST https://api.anthropic.com/v1/messages\n{\n  \"model\": \"claude-sonnet-5\",\n  \"max_tokens\": 1024,\n  \"system\": \"You are a concise technical assistant.\",\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"What does stop_reason mean?\"}\n  ]\n}\n\n// response (shortened)\n{\n  \"id\": \"msg_01...\",\n  \"model\": \"claude-sonnet-5\",\n  \"content\": [{\"type\": \"text\", \"text\": \"It tells you why generation stopped...\"}],\n  \"stop_reason\": \"end_turn\",\n  \"usage\": {\"input_tokens\": 24, \"output_tokens\": 41}\n}"}, {"h": "Step-by-step: a multi-turn conversation", "body": "1. Send request #1 with one user message.\n2. Receive a reply with role \"assistant\".\n3. To continue the conversation, send request #2 with BOTH the original user message, the assistant's reply, and the new user message \u2014 all three, in order.\n4. Repeat, appending every new turn to the growing array.\n\nNotice what's missing: no session ID, no server-side memory, nothing. If your array doesn't include a turn, Claude has no way of knowing it happened. This is the single fact that explains almost every \"why doesn't Claude remember X\" bug."}], "diagram": {"title": "Click each stage of one request/response cycle", "steps": [{"t": "Request built", "detail": "Your app assembles model, system, messages, and max_tokens into one JSON body. Nothing is sent yet \u2014 this is pure local construction."}, {"t": "Sent to Claude", "detail": "A single HTTPS POST to /v1/messages. Stateless: this call carries zero knowledge of any other call, past or future."}, {"t": "Response generated", "detail": "Claude produces content blocks and, when generation stops, a stop_reason explaining why (finished, hit a limit, wants a tool, etc.)."}, {"t": "Your app decides", "detail": "Branch on stop_reason: display the text, run a tool and continue, or handle a truncated/refused response \u2014 the API hands you the decision, it doesn't make it for you."}]}, "mistakes": ["<b>Treating every stop_reason as \"done.\"</b> max_tokens means the output may be an unfinished fragment. tool_use means the model is waiting on you, not finished at all.", "<b>Putting the system prompt inside messages.</b> There's no role: \"system\" message \u2014 system is its own top-level field.", "<b>Forgetting to resend history.</b> Dropping an earlier turn doesn't just lose context \u2014 to Claude, that turn never happened.", "<b>Assuming a low max_tokens is \"safer.\"</b> It just moves the failure mode from cost to silent truncation."], "troubleshoot": [{"sym": "The reply looks cut off mid-sentence.", "fix": "Check stop_reason. If it says max_tokens, raise the limit or shorten what you're asking for \u2014 don't treat the fragment as a complete answer."}, {"sym": "Claude seems to have forgotten something from earlier.", "fix": "Print the exact messages array you sent for that call. Almost always, the earlier turn simply isn't in it."}, {"sym": "The request is rejected outright.", "fix": "Check for a missing required field (model, max_tokens) or a malformed messages array (e.g. two user turns in a row with no assistant turn between them)."}], "check": [{"q": "Your app sends a request with only the newest user message, leaving out the last two turns of the conversation. What happens?", "o": ["Claude automatically retrieves the missing turns from its own memory of the session", "Claude responds as if those two turns never happened, since the API has no memory between calls", "The API rejects the request as incomplete", "Claude asks the user to repeat the missing turns"], "c": 1, "e": "The Messages API is stateless \u2014 whatever isn't in the messages array simply doesn't exist from Claude's point of view for that call."}], "summary": "The Messages API is a stateless contract: your app owns the conversation history and resends it every call. Requests need a model, max_tokens, and a messages array; the system prompt is separate. Responses always include a stop_reason \u2014 read it, don't assume it."}, {"id": "tool-use", "title": "Tool Use & Function Calling", "tag": "Tools & MCPs", "objectives": ["Describe the full round trip of a tool call, start to finish", "Write a tool description the model can actually reason from", "Explain why Claude never executes a tool itself", "Handle a tool error without breaking the loop"], "sections": [{"h": "Why this exists", "body": "A language model, by itself, can't check today's weather, query your database, or send an email \u2014 it only knows how to produce text. Tool use is the bridge: a structured way for Claude to say \"I need you to run this specific action with these specific inputs\" so your application can go do something real and hand the result back."}, {"h": "The beginner version", "body": "Imagine Claude as a very capable assistant sitting on the other side of a phone line, with no hands. If it needs today's weather, it can't look it up \u2014 it has to ask you, out loud, to look it up and read the result back. That's exactly what a tool call is: a structured request from Claude, an action your code performs, and a result handed back so Claude can finish the thought."}, {"h": "The technical version", "body": "You define a tool with a name, a description, and an input_schema (JSON Schema). Claude decides on its own, based purely on the description and the conversation, whether a tool is needed. If so, the response's stop_reason is tool_use and the content array contains a tool_use block with the tool's name and the arguments Claude chose. Your application executes the actual function, then sends a new message with role \"user\" containing a tool_result block carrying the output, keyed to that tool call's id. Claude continues from there.", "code": "// 1. you define the tool\n{\n  \"name\": \"get_weather\",\n  \"description\": \"Get current weather for a city. Use when the user asks about live conditions.\",\n  \"input_schema\": {\n    \"type\": \"object\",\n    \"properties\": { \"city\": {\"type\": \"string\"} },\n    \"required\": [\"city\"]\n  }\n}\n\n// 2. Claude's response\n{ \"stop_reason\": \"tool_use\",\n  \"content\": [{ \"type\": \"tool_use\", \"id\": \"toolu_1\", \"name\": \"get_weather\", \"input\": {\"city\": \"Kochi\"} }] }\n\n// 3. your app runs get_weather(\"Kochi\"), then sends:\n{ \"role\": \"user\", \"content\": [\n    { \"type\": \"tool_result\", \"tool_use_id\": \"toolu_1\", \"content\": \"31C, light rain\" }\n]}"}, {"h": "Step-by-step walkthrough", "body": "1. Define your tools and send the user's message alongside them.\n2. If stop_reason is tool_use, read the tool_use block(s) \u2014 there can be more than one in parallel.\n3. Execute each tool for real in your own code.\n4. Send a new message containing a tool_result for every tool_use id you received.\n5. Claude continues, possibly calling another tool, until stop_reason is end_turn."}], "diagram": {"title": "Click each stage of the tool-use round trip", "steps": [{"t": "1. Claude requests", "detail": "stop_reason: tool_use. Claude has decided it needs an action performed and specifies exactly which tool and which arguments."}, {"t": "2. App executes", "detail": "Your code, not Claude, actually runs the function \u2014 hits the database, calls the weather API, whatever the tool does."}, {"t": "3. Result returned", "detail": "You send a tool_result message back, tied to the same tool_use id, containing whatever the tool actually produced (or an error)."}, {"t": "4. Claude continues", "detail": "With the result in hand, Claude keeps reasoning \u2014 answers the user, or requests another tool if the task needs more steps."}]}, "mistakes": ["<b>A vague tool description.</b> \"Sends an email\" doesn't tell the model WHEN to use it \u2014 that ambiguity is what causes wrong or premature calls.", "<b>Assuming Claude executes the tool.</b> It never does. If nothing in your code handles tool_use, the conversation just stalls.", "<b>Swallowing a tool error silently.</b> Send the error back as the tool_result so Claude can adapt, instead of failing the whole turn.", "<b>One giant do-everything tool.</b> Narrow, single-purpose tools with clear names are far easier for the model to select correctly."], "troubleshoot": [{"sym": "Claude keeps calling the wrong tool among several similar ones.", "fix": "Sharpen each tool's description so their purposes don't overlap \u2014 this is almost always a description problem, not a model problem."}, {"sym": "The conversation seems to hang after a tool_use.", "fix": "Confirm your code is actually detecting stop_reason: tool_use and sending back a tool_result \u2014 a missing handler is the most common cause."}, {"sym": "A tool call has arguments that don't make sense.", "fix": "Check whether your input_schema is ambiguous or under-specified \u2014 tighten types, required fields, and enums."}], "check": [{"q": "Claude returns a tool_use block asking to call check_inventory. What should your application do?", "o": ["Ignore it and just answer the user's question directly", "Actually execute check_inventory in your own code, then send the result back as a tool_result", "Ask the user to run the tool themselves", "Retry the same request with a different model"], "c": 1, "e": "Claude never executes tools itself \u2014 your application is responsible for actually running the function and returning the result."}], "summary": "Tool use is a round trip, not a single step: Claude proposes a call, your app executes it for real, and the result comes back as a tool_result before Claude continues. The tool's description is what the model reasons from, so writing it precisely matters as much as the schema."}, {"id": "caching-context", "title": "Prompt Caching & Context Management", "tag": "Model Selection & Optimization", "objectives": ["Explain what prompt caching actually changes about a request", "Position a prompt so caching can take effect", "Distinguish context editing from compaction", "Recognize when a conversation needs pruning versus summarizing"], "sections": [{"h": "Why this exists", "body": "Because every call resends the whole conversation, cost and latency grow with it \u2014 and a lot of what gets resent (a long system prompt, reference documents, tool definitions) is identical, call after call. Reprocessing the exact same content from scratch every single time is pure waste. Prompt caching and context management exist to cut that waste without changing what the model can see."}, {"h": "The beginner version", "body": "Imagine reading the same twenty-page briefing document out loud before every single meeting, word for word, even though nothing in it changed. Caching is pinning a copy of that briefing to the wall so everyone can just glance at it instead of having it re-read aloud \u2014 same information, far less repeated effort. Context management is the separate practice of tidying the meeting notes themselves so old, no-longer-needed detail doesn't pile up and bury what actually matters."}, {"h": "The technical version", "body": "You mark a cache breakpoint after a stable prefix (system prompt, reference docs, tool defs). If a later call sends that exact same prefix again, the cached version is reused instead of reprocessed \u2014 cutting both time-to-first-token and cost on that portion. It only works if the prefix is byte-for-byte identical and appears first; anything variable (a timestamp, per-user data) placed before it breaks the match for every call after it.\n\nSeparately, once a long-running conversation grows, you manage it two different ways: context editing REMOVES content outright (old tool outputs you've already acted on and no longer need), while compaction SUMMARIZES it (replacing detail with a shorter description when the substance still matters)."}, {"h": "Step-by-step: structuring a cacheable prompt", "body": "1. Put everything stable first: system prompt, reference material, tool definitions.\n2. Mark a cache breakpoint right after that stable block.\n3. Put the one thing that changes every call \u2014 the user's actual new message \u2014 last.\n4. Verify: does every call send an IDENTICAL copy of everything before the breakpoint? If anything varies, the cache won't hit."}], "mistakes": ["<b>Putting a timestamp or user ID before the cached block.</b> Any variation in the prefix breaks the cache match for the entire call, not just that field.", "<b>Confusing caching with context editing.</b> Caching makes a repeated prefix cheap; editing makes the conversation itself shorter. They solve different problems and are often used together.", "<b>Clearing content that's still needed.</b> Editing is fine for old tool output you've already acted on \u2014 not for a decision the conversation still depends on later.", "<b>Assuming a bigger context window fixes bloat.</b> It delays the problem and raises cost; it doesn't replace pruning or summarizing."], "troubleshoot": [{"sym": "Caching seems to never hit, even on a stable system prompt.", "fix": "Look at everything BEFORE the cache breakpoint \u2014 something in it is probably varying call to call, even something small like a date string."}, {"sym": "A long-running assistant starts contradicting itself.", "fix": "That's usually context bloat \u2014 prune stale tool output and compact older turns rather than just letting history grow."}, {"sym": "After compaction, the assistant seems to have lost a decision it needs.", "fix": "That decision should have been written into explicit state before compaction, not left to survive inside a summary by luck."}], "check": [{"q": "A team's cached 12,000-token system prompt keeps missing the cache on nearly every call, even though the prompt text itself never changes. What's the most likely cause?", "o": ["Caching only works on prompts under 5,000 tokens", "Something variable, like a timestamp, is being placed before the cached content, breaking the prefix match", "The system prompt needs to be re-uploaded before every call", "Caching only applies when streaming is disabled"], "c": 1, "e": "Caching matches on an identical prefix \u2014 anything variable placed before the stable content changes the prefix on every call, so the cache never matches."}], "summary": "Caching cuts the cost of resending an identical, stable prefix \u2014 it changes nothing about what the model can see. Context editing removes what's no longer needed; compaction summarizes what still matters. All three manage cost and quality on long conversations, and they're not interchangeable."}, {"id": "agents-workflows", "title": "Agents, Workflows & Subagents", "tag": "Agents & Workflows", "objectives": ["Decide correctly between a workflow and an agent for a given task", "Explain why a step ceiling matters even for successful runs", "Describe when delegating to a subagent helps versus hurts", "Put a fixed sequence of steps into the right order (exercise below)"], "sections": [{"h": "Why this exists", "body": "Some tasks have a path you can write down in advance. Others don't \u2014 the right next step only becomes clear once you've seen what an earlier step turned up. Building every task the same way, agent or workflow, wastes either predictability or flexibility depending on which one the task actually needed."}, {"h": "The beginner version", "body": "A workflow is a recipe: fixed steps, fixed order, every time, no matter what's in the fridge. An agent is a chef: given a goal and a fridge, it decides in the moment what to cook and in what order, adjusting as it goes. Recipes are predictable and easy to test. Chefs handle situations no recipe anticipated \u2014 at the cost of being harder to predict."}, {"h": "The technical version", "body": "A workflow's control flow is written by you, in code, ahead of time \u2014 the model gets called at specific, predetermined points to do the reasoning-heavy parts, but the sequence itself never changes. An agent's control flow is chosen by the model at run time: gather context, take an action, check the result, decide what's next \u2014 repeat. That loop needs two safeguards a workflow doesn't: an explicit, checkable success condition (so it can recognize when it's actually done), and a hard step ceiling as a backstop for the run that never converges.\n\nA subagent delegates a bounded subtask to a separate agent instance with its own context window, reporting a result back to the parent. That isolation keeps the parent's context from bloating with someone else's intermediate detail \u2014 but only if the handoff actually includes what the subtask needs to do its job."}, {"h": "Step-by-step: choosing workflow vs. agent", "body": "1. Ask: can I write the exact steps down, in order, right now? \n2. If yes \u2014 build a workflow. Call the model only where reasoning genuinely adds value.\n3. If no, because the right next step depends on what an earlier step finds \u2014 that's a real agent problem.\n4. If it's an agent, define a concrete success condition and a step ceiling before writing a single line of the loop."}], "dnd": {"prompt": "Drag these into the order a well-designed agent loop should follow:", "items": ["Gather context relevant to the current goal", "Decide and take one action (e.g. call a tool)", "Check the result against a real success condition", "If not done, repeat from step 1 \u2014 bounded by a step ceiling"]}, "mistakes": ["<b>Building an agent for a fixed, known sequence.</b> If the path never changes, an agent just adds unpredictability with no upside over a workflow.", "<b>No real success condition.</b> Without one, the loop can't tell \"made progress\" from \"did something,\" and tends to spin.", "<b>No step ceiling.</b> Even a well-designed loop needs a hard backstop for the run that never converges \u2014 it's not there to speed up the runs that succeed.", "<b>A subagent handoff missing key context.</b> Isolation is the point of a subagent, but the parent still has to hand over what the subtask actually needs."], "troubleshoot": [{"sym": "An agent keeps calling the same tool with near-identical inputs.", "fix": "That's usually a missing progress check \u2014 the loop can't tell it isn't converging. A lower step limit hides the symptom without fixing it."}, {"sym": "Adding a subagent made overall quality worse.", "fix": "Check exactly what context was handed to the subagent \u2014 the parent likely left out something the subtask needed."}, {"sym": "A \"simple\" workflow keeps needing more and more special-case branches.", "fix": "That's often a sign the task actually needs agent-style judgment \u2014 the path genuinely isn't fixed, and the workflow is fighting reality."}], "check": [{"q": "A four-step onboarding flow (collect email, verify, create account, welcome message) runs identically for every single signup, no exceptions. What's the better design?", "o": ["An autonomous agent with a tool for each step, to handle edge cases intelligently", "A deterministic workflow, since the path is entirely fixed and known in advance", "Two competing agents that vote on each step", "There's no meaningful difference between the two approaches here"], "c": 1, "e": "When every step and their order are already known, a workflow gives the same capability with far more predictability \u2014 an agent adds unpredictability without adding real value on a fixed path."}], "summary": "Workflows encode a known path directly; agents discover the path at run time and need a real success condition plus a step ceiling. Subagents isolate a subtask's context \u2014 valuable when the subtask is independent, risky when the handoff leaves out something it needed."}];
+
+/* ---------------- PROGRESS TRACKING (lessons/labs) ---------------- */
+function getCompletedLessons(){
+  try{ return JSON.parse(localStorage.getItem("ccdvf_lessons_done")||"[]"); }catch(e){ return []; }
+}
+function markLessonComplete(id){
+  try{
+    const done = getCompletedLessons();
+    if(!done.includes(id)){ done.push(id); localStorage.setItem("ccdvf_lessons_done", JSON.stringify(done)); }
+  }catch(e){}
+}
+function getCompletedLabs(){
+  try{ return JSON.parse(localStorage.getItem("ccdvf_labs_done")||"[]"); }catch(e){ return []; }
+}
+function markLabComplete(id){
+  try{
+    const done = getCompletedLabs();
+    if(!done.includes(id)){ done.push(id); localStorage.setItem("ccdvf_labs_done", JSON.stringify(done)); }
+  }catch(e){}
+}
+
+/* ---------------- DEEP LESSONS RENDER ---------------- */
+function renderLessons(){
+  const root = document.getElementById("lessons-list");
+  const done = getCompletedLessons();
+  root.innerHTML = LESSONS.map((l,li)=>{
+    const isDone = done.includes(l.id);
+    const sectionsHtml = l.sections.map(s=>(
+      "<h4>"+s.h+"</h4><p>"+s.body.replace(/\n/g,"<br>")+"</p>"+
+      (s.code ? "<div class=\"lesson-code\">"+escapeHtml(s.code)+"</div>" : "")
+    )).join("");
+
+    const diagramHtml = l.diagram ? (
+      "<h4>"+l.diagram.title+"</h4>"+
+      "<div class=\"flow-diagram\" data-lesson=\""+l.id+"\">"+
+        l.diagram.steps.map((st,i)=>(
+          (i>0?"<div class=\"flow-arrow\">\u2192</div>":"")+
+          "<div class=\"flow-step\" data-lesson=\""+l.id+"\" data-step=\""+i+"\"><div class=\"fs-n\">STEP "+(i+1)+"</div><div class=\"fs-t\">"+st.t+"</div></div>"
+        )).join("")+
+      "</div>"+
+      "<div class=\"flow-detail\" id=\"flow-detail-"+l.id+"\">Click a step above to see what happens there.</div>"
+    ) : "";
+
+    const dndHtml = l.dnd ? (
+      "<h4>Try it: order the steps</h4>"+
+      "<p class=\"muted\">"+l.dnd.prompt+"</p>"+
+      "<div class=\"dnd-zone\" id=\"dnd-"+l.id+"\"></div>"+
+      "<button class=\"btn ghost\" id=\"dnd-check-"+l.id+"\" style=\"margin-top:6px;\">Check order</button>"+
+      "<div class=\"dnd-feedback\" id=\"dnd-fb-"+l.id+"\"></div>"
+    ) : "";
+
+    const mistakesHtml = "<h4>Common mistakes</h4><ul class=\"lesson-mistakes\">"+l.mistakes.map(m=>"<li>"+m+"</li>").join("")+"</ul>";
+    const troubleHtml = "<h4>Troubleshooting</h4>"+l.troubleshoot.map(t=>(
+      "<p><b>Symptom:</b> "+t.sym+"<br><span class=\"muted\">"+t.fix+"</span></p>"
+    )).join("");
+
+    const checkHtml = "<h4>Knowledge check</h4>"+l.check.map((c,ci)=>(
+      "<div class=\"lesson-check\" data-lesson=\""+l.id+"\" data-qi=\""+ci+"\">"+
+        "<div class=\"lc-q\">"+c.q+"</div>"+
+        "<div class=\"lc-opts\">"+c.o.map((o,oi)=>(
+          "<button class=\"lc-opt\" data-oi=\""+oi+"\">"+o+"</button>"
+        )).join("")+
+        "</div>"+
+        "<div class=\"lc-fb\"></div>"+
+      "</div>"
+    )).join("");
+
+    const summaryHtml = "<h4>Recap</h4><p>"+l.summary+"</p>";
+
+    return (
+      "<div class=\"lesson-card\">"+
+        "<div class=\"lesson-head\">"+
+          "<div class=\"ln\">LESSON "+(li+1)+" \u00b7 "+l.tag+"</div>"+
+          "<h3>"+l.title+"</h3>"+
+        "</div>"+
+        "<div class=\"lesson-obj\"><b>Learning objectives</b><ul>"+l.objectives.map(o=>"<li>"+o+"</li>").join("")+"</ul></div>"+
+        "<div class=\"lesson-body\">"+
+          sectionsHtml + diagramHtml + dndHtml + mistakesHtml + troubleHtml + checkHtml + summaryHtml+
+          "<div class=\"lesson-complete-row\">"+
+            "<button class=\"btn"+(isDone?" ghost":"")+"\" data-complete=\""+l.id+"\">"+(isDone?"Marked complete":"Mark lesson complete")+"</button>"+
+            "<span class=\"done-badge"+(isDone?" show":"")+"\" id=\"done-badge-"+l.id+"\">\u2713 done</span>"+
+          "</div>"+
+        "</div>"+
+      "</div>"
+    );
+  }).join("");
+
+  // flow diagram interactivity
+  root.querySelectorAll(".flow-step").forEach(step=>{
+    step.addEventListener("click", ()=>{
+      const lessonId = step.dataset.lesson;
+      const stepIdx = parseInt(step.dataset.step,10);
+      const lesson = LESSONS.find(l=>l.id===lessonId);
+      root.querySelectorAll(".flow-step[data-lesson=\""+lessonId+"\"]").forEach(s=>s.classList.remove("active"));
+      step.classList.add("active");
+      document.getElementById("flow-detail-"+lessonId).textContent = lesson.diagram.steps[stepIdx].detail;
+    });
+  });
+
+  // drag and drop exercises
+  LESSONS.filter(l=>l.dnd).forEach(l=>{
+    renderDnd(l);
+  });
+
+  // knowledge checks
+  root.querySelectorAll(".lesson-check").forEach(block=>{
+    const lessonId = block.dataset.lesson;
+    const qi = parseInt(block.dataset.qi,10);
+    const lesson = LESSONS.find(l=>l.id===lessonId);
+    const q = lesson.check[qi];
+    block.querySelectorAll(".lc-opt").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const oi = parseInt(btn.dataset.oi,10);
+        block.querySelectorAll(".lc-opt").forEach((b,i)=>{
+          b.classList.remove("correct","wrong");
+          if(i===q.c) b.classList.add("correct");
+          else if(i===oi) b.classList.add("wrong");
+        });
+        const fb = block.querySelector(".lc-fb");
+        fb.textContent = q.e;
+        fb.classList.add("show");
+      });
+    });
+  });
+
+  // completion buttons
+  root.querySelectorAll("[data-complete]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const id = btn.dataset.complete;
+      markLessonComplete(id);
+      btn.textContent = "Marked complete";
+      btn.classList.add("ghost");
+      document.getElementById("done-badge-"+id).classList.add("show");
+    });
+  });
+}
+
+function escapeHtml(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+/* ---------------- DRAG AND DROP EXERCISE ---------------- */
+function renderDnd(lesson){
+  const zone = document.getElementById("dnd-"+lesson.id);
+  if(!zone) return;
+  const shuffled = shuffle(lesson.dnd.items.slice());
+  zone.innerHTML = shuffled.map(item=>(
+    "<div class=\"dnd-item\" draggable=\"true\" data-text=\""+item.replace(/"/g,"&quot;")+"\"><span class=\"dnd-handle\">::</span>"+item+"</div>"
+  )).join("");
+
+  let dragEl = null;
+  zone.querySelectorAll(".dnd-item").forEach(item=>{
+    item.addEventListener("dragstart", ()=>{ dragEl = item; item.classList.add("dragging"); });
+    item.addEventListener("dragend", ()=>{ item.classList.remove("dragging"); dragEl = null; });
+    item.addEventListener("dragover", (e)=>{
+      e.preventDefault();
+      if(!dragEl || dragEl===item) return;
+      const rect = item.getBoundingClientRect();
+      const before = (e.clientY - rect.top) < rect.height/2;
+      zone.insertBefore(dragEl, before ? item : item.nextSibling);
+    });
+  });
+
+  const checkBtn = document.getElementById("dnd-check-"+lesson.id);
+  const fb = document.getElementById("dnd-fb-"+lesson.id);
+  if(checkBtn){
+    checkBtn.addEventListener("click", ()=>{
+      const order = Array.from(zone.querySelectorAll(".dnd-item")).map(el=>el.dataset.text);
+      const correct = order.every((t,i)=> t===lesson.dnd.items[i]);
+      fb.textContent = correct ? "That's the right order." : "Not quite the right order yet — drag to rearrange and check again.";
+      fb.style.color = correct ? "var(--good)" : "var(--bad)";
+    });
+  }
+}
+
+
+
+
+/* ---------------- SCENARIO LABS DATA ---------------- */
+const SCENARIO_LABS = [
+  {id:"debug-checkout", type:"stateful", tag:"Debugging an application", title:"Debug: checkout total is wrong", desc:"A customer reports their cart total is wrong whenever an item's quantity is more than 1. Find the bug in the real (simulated) source file and fix it."},
+  {id:"build-discount", type:"stateful", tag:"Building a feature", title:"Build: a discount helper", desc:"Product wants a reusable applyDiscount(total, percent) helper. The file is scaffolded but empty — implement it and get the check to pass."},
+  {id:"tool-call-failure", type:"guided", tag:"Investigating a failed tool call", title:"Diagnose a broken tool integration", desc:"A support agent's tool keeps failing. Walk through the logs and pick the right diagnosis at each step."},
+  {id:"context-limits", type:"guided", tag:"Handling context limitations", title:"Fix a context overflow", desc:"An assistant's context is bloated with old tool output and it's losing track of recent instructions. Choose the right fix."},
+  {id:"security-review", type:"guided", tag:"Securing an AI application", title:"Spot the security issue", desc:"Review a simulated agent setup for security weaknesses and decide what to change."}
+];
+
+const STATEFUL_LABS = {
+  "debug-checkout": {
+    objective: "Find and fix the bug in calculateTotal() so it correctly multiplies price by quantity.",
+    files: {
+      "src/checkout.js": "export function calculateTotal(items) {\n  return items.reduce((sum, item) => sum + item.price, 0);\n}",
+      "tests/checkout.spec.js": "test(\"calculates total with quantity\", () => {\n  const items = [{ price: 10, qty: 2 }, { price: 5, qty: 3 }];\n  expect(calculateTotal(items)).toBe(35); // (10*2) + (5*3)\n});",
+      "README.md": "# Acme Checkout\nRun the test with the Run tests button below after editing checkout.js."
+    },
+    editableFile: "src/checkout.js",
+    readonly: ["tests/checkout.spec.js", "README.md"],
+    hint: "The test expects price * quantity per item, but the current reduce only adds price. Look at how each item's qty field is (not) being used.",
+    check: (content)=>{
+      return /item\.price\s*\*\s*item\.qty/.test(content) || /item\.qty\s*\*\s*item\.price/.test(content);
+    },
+    successMsg: "calculateTotal now multiplies price by quantity for each item — the test passes."
+  },
+  "build-discount": {
+    objective: "Implement applyDiscount(total, percent) so it returns the discounted total, and export it.",
+    files: {
+      "src/discount.js": "// TODO: implement applyDiscount(total, percent)\n// it should return total reduced by percent% (e.g. applyDiscount(100, 20) -> 80)\n\nexport function applyDiscount(total, percent) {\n  // your code here\n}",
+      "src/checkout.js": "export function calculateTotal(items) {\n  return items.reduce((sum, item) => sum + item.price * item.qty, 0);\n}",
+      "tests/discount.spec.js": "test(\"applies a percentage discount\", () => {\n  expect(applyDiscount(100, 20)).toBe(80);\n  expect(applyDiscount(50, 10)).toBe(45);\n});"
+    },
+    editableFile: "src/discount.js",
+    readonly: ["src/checkout.js", "tests/discount.spec.js"],
+    hint: "total - (total * percent / 100) is the standard formula. Make sure you actually return the value, not just compute it.",
+    check: (content)=>{
+      const hasReturn = /return\s+[^;]*total[^;]*(percent|pct)/i.test(content) || /return\s+total\s*-\s*\(?total\s*\*\s*percent\s*\/\s*100\)?/i.test(content);
+      return hasReturn;
+    },
+    successMsg: "applyDiscount returns a discounted total and the test passes."
+  }
+};
+
+const GUIDED_LABS = {
+  "tool-call-failure": [
+    {
+      prompt: "Support ticket: \"the refund tool keeps failing.\"\n\nYou pull the logs:\n\n  tool_use  name: \"issue_refund\"  input: {\"order_id\": \"A1029\", \"amount\": \"49.99\"}\n  tool_result  error: \"invalid type for 'amount': expected number, got string\"\n\nWhat's the most direct fix?",
+      options: [
+        {text:"Tell the model in the system prompt to always double-check its arguments before calling tools", correct:false, feedback:"That might help a little, but it doesn't fix the actual defect — the schema itself allowed a string where a number was required."},
+        {text:"Fix the tool's input_schema so 'amount' is explicitly typed as a number, not a string", correct:true, feedback:"Correct. The schema is what should have prevented this — tightening the type is the direct, durable fix."},
+        {text:"Catch the error and silently default the amount to 0", correct:false, feedback:"That would cause a $0 refund to silently go through — worse than the original failure, not a fix."}
+      ]
+    },
+    {
+      prompt: "You fix the schema. Next ticket: the same tool now fails with:\n\n  tool_result  error: \"order A1029 not found\"\n\nBut order A1029 definitely exists. What do you check first?",
+      options: [
+        {text:"Whether the tool is querying the right environment (e.g. staging vs. production database)", correct:true, feedback:"Correct instinct — a 'not found' for something that definitely exists is a classic symptom of hitting the wrong environment or data source."},
+        {text:"Whether the model needs a larger context window", correct:false, feedback:"Context size has nothing to do with whether a specific order ID exists in whatever backend the tool is querying."},
+        {text:"Whether the customer typed the order ID correctly", correct:false, feedback:"Worth ruling out eventually, but the ticket already states the order exists — investigate the tool's own data source first."}
+      ]
+    }
+  ],
+  "context-limits": [
+    {
+      prompt: "A long-running assistant is losing track of instructions given 30 turns ago. Inspecting the context shows it's nearly full of verbose raw tool outputs from early in the session — big JSON blobs the assistant already used and doesn't need again. What's the right first move?",
+      options: [
+        {text:"Switch to a model with a larger context window and change nothing else", correct:false, feedback:"That delays the same problem at higher cost — it doesn't address the bloat itself."},
+        {text:"Clear out (context-edit) those old, already-used tool outputs so they stop taking up space", correct:true, feedback:"Correct. Content that's already been acted on and isn't needed again is exactly what context editing is for."},
+        {text:"Tell the assistant to try harder to remember the early instructions", correct:false, feedback:"That's not a mechanism — the content is either in context or it isn't; asking it to 'remember better' doesn't change what's actually available."}
+      ]
+    },
+    {
+      prompt: "After clearing the old tool output, the assistant still occasionally loses track of a key decision made near the start of a very long conversation. What's the durable fix for that specific decision?",
+      options: [
+        {text:"Write that decision into explicit state that gets carried forward regardless of future compaction or edits", correct:true, feedback:"Correct. Anything that must survive the whole run — regardless of how context gets managed later — needs to live in durable state, not just the raw transcript."},
+        {text:"Repeat the entire conversation history at the start of every new turn", correct:false, feedback:"That reintroduces the exact bloat problem you just fixed, just in a different form."},
+        {text:"Lower the temperature so the model is less likely to forget", correct:false, feedback:"Temperature affects sampling variety, not what information is actually present in context — it won't fix a missing-context problem."}
+      ]
+    }
+  ],
+  "security-review": [
+    {
+      prompt: "You're reviewing an internal agent. It has a single 'employee_lookup' tool meant for a directory app that only needs someone's office location — but the tool actually returns the full employee record, including salary and SSN, because \"it was simpler to just return everything.\" What should change?",
+      options: [
+        {text:"Nothing, since the system prompt already says to only use the location field", correct:false, feedback:"A system-prompt instruction isn't enforcement — if the agent is ever manipulated into misusing the tool, the sensitive fields are still sitting right there to leak."},
+        {text:"Narrow the tool itself so it only returns the office-location field the directory app actually needs", correct:true, feedback:"Correct — this is least privilege in practice. If the tool structurally can't return salary or SSN, no prompt-level mistake can leak them."},
+        {text:"Add a warning comment in the code noting the tool shouldn't be misused", correct:false, feedback:"A comment doesn't change what data the tool can actually return — it's documentation, not a control."}
+      ]
+    },
+    {
+      prompt: "Separately, this same agent fetches and summarizes web pages users link. What's the right default assumption about that fetched content?",
+      options: [
+        {text:"Treat it as untrusted data, kept separate from the agent's real instructions, regardless of how official it looks", correct:true, feedback:"Correct — this is the core defense against prompt injection: untrusted content never gets treated as an instruction, no matter how it's phrased."},
+        {text:"Trust it by default, since it's just being summarized rather than acted on", correct:false, feedback:"Summarizing still means the model reads the content — if it contains embedded instructions, 'just summarizing' doesn't protect against the agent following them."},
+        {text:"Scan it for the word 'ignore' and block anything containing that word", correct:false, feedback:"Keyword filtering like this is trivially bypassed by rephrasing — it's not a real structural defense."}
+      ]
+    }
+  ]
+};
+
+
+
+/* ---------------- SCENARIO LAB ENGINE ---------------- */
+let labFsState = {}; // per-lab-id -> { files: {path:content}, activeFile: path }
+
+function renderScenarioPicker(){
+  const el = document.getElementById("scenario-picker");
+  const done = getCompletedLabs();
+  el.innerHTML = SCENARIO_LABS.map(s=>(
+    "<div class=\"scenario-card\" data-scenario=\""+s.id+"\">"+
+      "<div class=\"sc-tag\">"+s.tag.toUpperCase()+"</div>"+
+      "<div class=\"sc-t\">"+s.title+"</div>"+
+      "<div class=\"sc-d\">"+s.desc+"</div>"+
+      "<div class=\"sc-status"+(done.includes(s.id)?" show":"")+"\">\u2713 completed</div>"+
+    "</div>"
+  )).join("");
+  el.querySelectorAll(".scenario-card").forEach(card=>{
+    card.addEventListener("click", ()=> openScenario(card.dataset.scenario));
+  });
+}
+
+function openScenario(id){
+  const scenario = SCENARIO_LABS.find(s=>s.id===id);
+  if(!scenario) return;
+  const panel = document.getElementById("scenario-panel");
+  window.scrollTo({top: panel.offsetTop - 80, behavior:"smooth"});
+  if(scenario.type==="stateful"){
+    openStatefulLab(scenario, panel);
+  } else {
+    openGuidedLab(scenario, panel);
+  }
+}
+
+function openStatefulLab(scenario, panel){
+  const def = STATEFUL_LABS[scenario.id];
+  if(!labFsState[scenario.id]){
+    labFsState[scenario.id] = { files: Object.assign({}, def.files), activeFile: def.editableFile };
+  }
+  const state = labFsState[scenario.id];
+
+  function paint(){
+    const fileList = Object.keys(def.files);
+    panel.innerHTML =
+      "<div class=\"lab-fs\">"+
+        "<div class=\"lab-fs-head\">"+
+          "<div><h3>"+scenario.title+"</h3><p>"+def.objective+"</p></div>"+
+          "<button class=\"btn ghost\" id=\"lab-close-btn\">Close</button>"+
+        "</div>"+
+        "<div class=\"lab-fs-body\">"+
+          "<div class=\"lab-fs-tree\">"+
+            fileList.map(f=>(
+              "<button class=\"lab-fs-file"+(f===state.activeFile?" active":"")+"\" data-file=\""+f+"\">"+f+"</button>"
+            )).join("")+
+          "</div>"+
+          "<div class=\"lab-fs-editor\">"+
+            "<textarea id=\"lab-editor-textarea\" "+(def.readonly.includes(state.activeFile)?"readonly":"")+" spellcheck=\"false\">"+escapeHtml(state.files[state.activeFile])+"</textarea>"+
+            "<div class=\"lab-fs-actions\">"+
+              (def.readonly.includes(state.activeFile) ? "<span style=\"font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);align-self:center;\">read-only reference file</span>" :
+                "<button class=\"btn\" id=\"lab-save-btn\">Save file</button><button class=\"btn ghost\" id=\"lab-test-btn\">Run tests</button><button class=\"btn ghost\" id=\"lab-hint-btn\">Show hint</button>")+
+            "</div>"+
+            "<div class=\"lab-fs-output\" id=\"lab-output\"></div>"+
+          "</div>"+
+        "</div>"+
+        "<div class=\"lab-fs-hint\" id=\"lab-hint\" style=\"display:none;\">"+def.hint+"</div>"+
+      "</div>";
+
+    panel.querySelectorAll(".lab-fs-file").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        state.activeFile = btn.dataset.file;
+        paint();
+      });
+    });
+    document.getElementById("lab-close-btn").addEventListener("click", ()=>{ panel.innerHTML = ""; });
+    const saveBtn = document.getElementById("lab-save-btn");
+    if(saveBtn){
+      saveBtn.addEventListener("click", ()=>{
+        state.files[state.activeFile] = document.getElementById("lab-editor-textarea").value;
+        document.getElementById("lab-output").innerHTML = "<span class=\"info-line\">Saved "+state.activeFile+".</span>";
+      });
+    }
+    const testBtn = document.getElementById("lab-test-btn");
+    if(testBtn){
+      testBtn.addEventListener("click", ()=>{
+        state.files[state.activeFile] = document.getElementById("lab-editor-textarea").value;
+        const content = state.files[def.editableFile];
+        const pass = def.check(content);
+        const out = document.getElementById("lab-output");
+        if(pass){
+          out.innerHTML = "<span class=\"ok-line\">\u2713 PASS</span>  "+def.successMsg;
+          markLabComplete(scenario.id);
+          renderScenarioPicker();
+        } else {
+          out.innerHTML = "<span class=\"bad-line\">\u2717 FAIL</span>  Not yet — the current code in "+def.editableFile+" doesn't satisfy the test. Keep editing and run again.";
+        }
+      });
+    }
+    const hintBtn = document.getElementById("lab-hint-btn");
+    if(hintBtn){
+      hintBtn.addEventListener("click", ()=>{
+        document.getElementById("lab-hint").style.display = "block";
+      });
+    }
+  }
+  paint();
+}
+
+function openGuidedLab(scenario, panel){
+  const steps = GUIDED_LABS[scenario.id];
+  let stepIdx = 0;
+
+  function paint(){
+    if(stepIdx >= steps.length){
+      panel.innerHTML =
+        "<div class=\"lab-fs\">"+
+          "<div class=\"lab-fs-head\"><div><h3>"+scenario.title+"</h3><p>Scenario complete.</p></div>"+
+          "<button class=\"btn ghost\" id=\"lab-close-btn\">Close</button></div>"+
+          "<div style=\"padding:16px;\"><span class=\"ok-line\" style=\"font-family:'JetBrains Mono',monospace;color:var(--good);\">\u2713 You worked through every decision point correctly.</span></div>"+
+        "</div>";
+      document.getElementById("lab-close-btn").addEventListener("click", ()=>{ panel.innerHTML = ""; });
+      markLabComplete(scenario.id);
+      renderScenarioPicker();
+      return;
+    }
+    const step = steps[stepIdx];
+    panel.innerHTML =
+      "<div class=\"lab-fs\">"+
+        "<div class=\"lab-fs-head\">"+
+          "<div><h3>"+scenario.title+"</h3><p>Step "+(stepIdx+1)+" of "+steps.length+"</p></div>"+
+          "<button class=\"btn ghost\" id=\"lab-close-btn\">Close</button>"+
+        "</div>"+
+        "<div class=\"guided-step\">"+
+          "<div class=\"gs-prompt\">"+escapeHtml(step.prompt)+"</div>"+
+          "<div class=\"gs-opts\">"+step.options.map((o,oi)=>(
+            "<button class=\"gs-opt\" data-oi=\""+oi+"\">"+o.text+"</button>"
+          )).join("")+"</div>"+
+          "<div class=\"gs-fb\" id=\"gs-fb\"></div>"+
+        "</div>"+
+      "</div>";
+    document.getElementById("lab-close-btn").addEventListener("click", ()=>{ panel.innerHTML = ""; });
+    panel.querySelectorAll(".gs-opt").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const oi = parseInt(btn.dataset.oi,10);
+        const opt = step.options[oi];
+        const fb = document.getElementById("gs-fb");
+        fb.textContent = opt.feedback;
+        fb.className = "gs-fb show "+(opt.correct?"ok":"no");
+        panel.querySelectorAll(".gs-opt").forEach(b=>b.disabled = true);
+        if(opt.correct){
+          const nextBtn = document.createElement("button");
+          nextBtn.className = "btn";
+          nextBtn.style.marginTop = "12px";
+          nextBtn.textContent = (stepIdx < steps.length-1) ? "Next \u2192" : "Finish";
+          nextBtn.addEventListener("click", ()=>{ stepIdx++; paint(); });
+          panel.querySelector(".guided-step").appendChild(nextBtn);
+        } else {
+          const retryBtn = document.createElement("button");
+          retryBtn.className = "btn ghost";
+          retryBtn.style.marginTop = "12px";
+          retryBtn.textContent = "Try again";
+          retryBtn.addEventListener("click", ()=>{ paint(); });
+          panel.querySelector(".guided-step").appendChild(retryBtn);
+        }
+      });
+    });
+  }
+  paint();
+}
+
+
+
+
+/* ---------------- CLAUDE DESKTOP SIMULATION DATA ---------------- */
+const DESKTOP_LABS = [
+  {id:"connect-mcp", title:"Connect an MCP server", desc:"Fix a misconfigured server entry and get it connected."},
+  {id:"use-mcp-tool", title:"Use an MCP tool", desc:"Ask the assistant something that requires a connected tool, and watch the round trip."},
+  {id:"diagnose-mcp", title:"Diagnose a connection failure", desc:"A different server won't connect. Work out why."},
+  {id:"file-context", title:"Work with files and context", desc:"See how which files you attach changes what the assistant can actually answer."},
+  {id:"permissions", title:"Understand permissions", desc:"An MCP tool wants a capability. Decide whether to grant it."}
+];
+
+const BROKEN_MCP_CONFIG = "{\n  \"name\": \"inventory-service\",\n  \"transport\": \"stdio\"\n  \"command\": \"inventory-mcp-server\",\n  \"port\": 9999\n}";
+const FIXED_MCP_HINT = "This JSON is missing a comma after \"transport\": \"stdio\" — that alone will make it fail to parse. (The port field isn't actually used by a stdio transport, but that won't stop the connection.)";
+
+/* ---------------- RENDER ---------------- */
+function renderDesktopRoot(){
+  const root = document.getElementById("desktop-root");
+  const doneLabs = getCompletedLabs();
+  root.innerHTML =
+    "<div class=\"desktop-chrome\">"+
+      "<div class=\"desktop-titlebar\">Simulated desktop client &mdash; learning environment, not the real Claude Desktop app</div>"+
+      "<div class=\"desktop-body\">"+
+        "<div class=\"desktop-sidebar\">"+
+          "<h5>Connectors</h5>"+
+          "<div class=\"desktop-connector\"><span>inventory-service</span><span class=\"dc-dot\" id=\"dot-inventory\"></span></div>"+
+          "<div class=\"desktop-connector\"><span>github</span><span class=\"dc-dot on\"></span></div>"+
+          "<div class=\"desktop-connector\"><span>linear</span><span class=\"dc-dot err\"></span></div>"+
+          "<h5>Labs</h5>"+
+          "<div id=\"desktop-lab-nav\"></div>"+
+        "</div>"+
+        "<div class=\"desktop-main\" id=\"desktop-main\"></div>"+
+      "</div>"+
+    "</div>";
+
+  const nav = document.getElementById("desktop-lab-nav");
+  nav.innerHTML = DESKTOP_LABS.map(l=>(
+    "<button class=\"desktop-connector\" data-desklab=\""+l.id+"\" style=\"width:100%;text-align:left;border:none;background:none;cursor:pointer;\"><span>"+l.title+(doneLabs.includes("desk-"+l.id)?" \u2713":"")+"</span></button>"
+  )).join("");
+  nav.querySelectorAll("[data-desklab]").forEach(btn=>{
+    btn.addEventListener("click", ()=> openDesktopLab(btn.dataset.desklab));
+  });
+
+  renderDesktopLabList();
+}
+
+function renderDesktopLabList(){
+  const main = document.getElementById("desktop-main");
+  main.innerHTML =
+    "<p style=\"color:var(--muted);font-size:13px;margin:0 0 14px;\">Pick a lab from the sidebar, or start here:</p>"+
+    "<div class=\"desktop-lab-list\">"+
+      DESKTOP_LABS.map(l=>(
+        "<div class=\"desktop-lab-card\" data-desklab=\""+l.id+"\"><div class=\"dl-t\">"+l.title+"</div><div class=\"dl-d\">"+l.desc+"</div></div>"
+      )).join("")+
+    "</div>";
+  main.querySelectorAll("[data-desklab]").forEach(card=>{
+    card.addEventListener("click", ()=> openDesktopLab(card.dataset.desklab));
+  });
+}
+
+function openDesktopLab(id){
+  if(id==="connect-mcp") return renderConnectMcpLab();
+  if(id==="use-mcp-tool") return renderUseMcpToolLab();
+  if(id==="diagnose-mcp") return renderDiagnoseMcpLab();
+  if(id==="file-context") return renderFileContextLab();
+  if(id==="permissions") return renderPermissionsLab();
+}
+
+/* ---- Lab 1: connect an MCP server ---- */
+function renderConnectMcpLab(){
+  const main = document.getElementById("desktop-main");
+  main.innerHTML =
+    "<h3 style=\"font-family:'Fraunces',serif;margin:0 0 6px;\">Connect: inventory-service</h3>"+
+    "<p style=\"color:var(--muted);font-size:12.5px;margin:0 0 10px;\">This server's config has a mistake. Fix the JSON, then click Connect.</p>"+
+    "<textarea class=\"desktop-config\" id=\"mcp-config-input\">"+escapeHtml(BROKEN_MCP_CONFIG)+"</textarea>"+
+    "<div class=\"lab-fs-actions\"><button class=\"btn\" id=\"mcp-connect-btn\">Connect</button><button class=\"btn ghost\" id=\"mcp-hint-btn\">Hint</button></div>"+
+    "<div class=\"lab-fs-output\" id=\"mcp-connect-output\"></div>";
+
+  document.getElementById("mcp-hint-btn").addEventListener("click", ()=>{
+    document.getElementById("mcp-connect-output").innerHTML = "<span class=\"info-line\">"+FIXED_MCP_HINT+"</span>";
+  });
+  document.getElementById("mcp-connect-btn").addEventListener("click", ()=>{
+    const raw = document.getElementById("mcp-config-input").value;
+    const out = document.getElementById("mcp-connect-output");
+    try{
+      const parsed = JSON.parse(raw);
+      if(!parsed.command){ throw new Error("missing command"); }
+      out.innerHTML = "<span class=\"ok-line\">\u2713 Connected.</span> inventory-service exposes tools: check_stock, reserve_item.";
+      const dot = document.getElementById("dot-inventory");
+      if(dot) dot.classList.add("on");
+      markLabComplete("desk-connect-mcp");
+      renderDesktopRoot();
+      renderConnectMcpLab();
+    }catch(e){
+      out.innerHTML = "<span class=\"bad-line\">\u2717 Failed to parse config:</span> "+e.message+". Check for a missing comma or bracket.";
+    }
+  });
+}
+
+/* ---- Lab 2: use an MCP tool ---- */
+function renderUseMcpToolLab(){
+  const main = document.getElementById("desktop-main");
+  main.innerHTML =
+    "<h3 style=\"font-family:'Fraunces',serif;margin:0 0 10px;\">Ask something that needs a tool</h3>"+
+    "<div class=\"desktop-convo\" id=\"desk-convo\"></div>"+
+    "<div class=\"desktop-composer\"><input type=\"text\" id=\"desk-composer-input\" placeholder=\"try: how much stock do we have of SKU-4471?\"><button class=\"btn\" id=\"desk-send-btn\">Send</button></div>";
+
+  const convo = document.getElementById("desk-convo");
+  function addMsg(cls, text){
+    const d = document.createElement("div");
+    d.className = "desktop-msg "+cls;
+    d.textContent = text;
+    convo.appendChild(d);
+    convo.scrollTop = convo.scrollHeight;
+  }
+  async function send(){
+    const input = document.getElementById("desk-composer-input");
+    const text = input.value.trim();
+    if(!text) return;
+    input.value = "";
+    addMsg("user", text);
+    await sleep(400);
+    addMsg("tool", "\u23fa calling check_stock(\"SKU-4471\") via inventory-service…");
+    await sleep(600);
+    addMsg("tool", "\u23bf  { in_stock: 12 }");
+    await sleep(400);
+    addMsg("assistant", "There are 12 units of SKU-4471 in stock right now.");
+    markLabComplete("desk-use-mcp-tool");
+    renderDesktopRoot();
+  }
+  document.getElementById("desk-send-btn").addEventListener("click", send);
+  document.getElementById("desk-composer-input").addEventListener("keydown", (e)=>{ if(e.key==="Enter") send(); });
+}
+
+/* ---- Lab 3: diagnose a connection failure (guided) ---- */
+function renderDiagnoseMcpLab(){
+  const main = document.getElementById("desktop-main");
+  const steps = [
+    {
+      prompt: "You try to connect the \"linear\" server. It fails with:\n\n  error: connection refused at localhost:4021\n\nWhat do you check first?",
+      options: [
+        {text:"Whether the linear MCP server process is actually running on that port", correct:true, feedback:"Right instinct — \"connection refused\" almost always means nothing is listening on that port at all, not a config typo."},
+        {text:"Whether your account has permission to use MCP servers", correct:false, feedback:"An account-permission problem would typically show a different error (something like 401/403), not a connection-refused at the transport level."},
+        {text:"Whether the model supports MCP", correct:false, feedback:"Model support isn't in play here — this is purely a networking-level failure before any model is even involved."}
+      ]
+    },
+    {
+      prompt: "You confirm the server process isn't running, start it, and reconnect — now it connects, but the tools/list request times out. The process is definitely running. What's most likely?",
+      options: [
+        {text:"The server is running but hanging on startup (e.g. waiting on its own dependency) rather than actually being ready to serve requests", correct:true, feedback:"Correct — \"running\" and \"ready\" aren't the same thing. A process that's up but stuck initializing will accept the connection and then hang."},
+        {text:"MCP servers can never support a tools/list request", correct:false, feedback:"tools/list is a standard part of the protocol — if it's timing out, something's wrong with this particular server instance, not the protocol."},
+        {text:"The client needs to be restarted", correct:false, feedback:"Possible in general, but the more specific, likely explanation given the symptoms is the server itself not being fully ready."}
+      ]
+    }
+  ];
+  runDesktopGuided(main, steps, "diagnose-mcp");
+}
+
+/* ---- Lab 4: work with files and context ---- */
+function renderFileContextLab(){
+  const main = document.getElementById("desktop-main");
+  main.innerHTML =
+    "<h3 style=\"font-family:'Fraunces',serif;margin:0 0 6px;\">Attach context, then ask</h3>"+
+    "<p style=\"color:var(--muted);font-size:12.5px;margin:0 0 10px;\">Pick which file(s) to attach, then ask: \"what's our refund window?\"</p>"+
+    "<div style=\"display:flex;flex-direction:column;gap:8px;margin-bottom:14px;\">"+
+      "<label style=\"font-size:13px;display:flex;gap:8px;align-items:center;\"><input type=\"checkbox\" id=\"file-policy\" checked> return-policy.md</label>"+
+      "<label style=\"font-size:13px;display:flex;gap:8px;align-items:center;\"><input type=\"checkbox\" id=\"file-brand\"> brand-guidelines.md</label>"+
+    "</div>"+
+    "<div class=\"desktop-composer\"><input type=\"text\" id=\"ctx-composer-input\" value=\"what's our refund window?\"><button class=\"btn\" id=\"ctx-send-btn\">Ask</button></div>"+
+    "<div class=\"desktop-convo\" id=\"ctx-convo\" style=\"margin-top:14px;max-height:180px;\"></div>";
+
+  document.getElementById("ctx-send-btn").addEventListener("click", async ()=>{
+    const convo = document.getElementById("ctx-convo");
+    convo.innerHTML = "";
+    const policyChecked = document.getElementById("file-policy").checked;
+    const d1 = document.createElement("div");
+    d1.className = "desktop-msg user";
+    d1.textContent = document.getElementById("ctx-composer-input").value;
+    convo.appendChild(d1);
+    await sleep(400);
+    const d2 = document.createElement("div");
+    d2.className = "desktop-msg assistant";
+    d2.textContent = policyChecked
+      ? "Per return-policy.md, the refund window is 30 days from delivery, with the item in original condition."
+      : "I don't see return-policy.md attached, so I don't actually have that information in context — only brand-guidelines.md is selected, which doesn't cover refunds. Attach return-policy.md and I can answer.";
+    convo.appendChild(d2);
+    markLabComplete("desk-file-context");
+    renderDesktopRoot();
+  });
+}
+
+/* ---- Lab 5: permissions ---- */
+function renderPermissionsLab(){
+  const main = document.getElementById("desktop-main");
+  main.innerHTML =
+    "<h3 style=\"font-family:'Fraunces',serif;margin:0 0 10px;\">A tool is requesting access</h3>"+
+    "<div class=\"guided-step\">"+
+      "<div class=\"gs-prompt\">The \"github\" MCP server's create_pr tool is requesting write access to ALL repositories in your organization, not just the one you're working in.\n\nWhat do you do?</div>"+
+      "<div class=\"gs-opts\">"+
+        "<button class=\"gs-opt\" data-choice=\"grant\">Grant it — broader access now means fewer permission prompts later</button>"+
+        "<button class=\"gs-opt\" data-choice=\"deny\">Deny it, and look for a way to scope access to just this repository</button>"+
+      "</div>"+
+      "<div class=\"gs-fb\" id=\"perm-fb\"></div>"+
+    "</div>";
+  main.querySelectorAll(".gs-opt").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const fb = document.getElementById("perm-fb");
+      main.querySelectorAll(".gs-opt").forEach(b=>b.disabled=true);
+      if(btn.dataset.choice==="deny"){
+        fb.className = "gs-fb show ok";
+        fb.textContent = "This is least privilege in practice: if this tool is ever misused — by a bug, a bad instruction, or a manipulated conversation — org-wide write access turns a small mistake into a very large one. Scoping to one repository bounds that risk without losing the capability you actually need.";
+      } else {
+        fb.className = "gs-fb show no";
+        fb.textContent = "This is the risk worth sitting with: convenience now versus blast radius later. If this tool is ever misused, org-wide write access means the damage isn't limited to the one repository you're actually working in.";
+      }
+      markLabComplete("desk-permissions");
+      renderDesktopRoot();
+    });
+  });
+}
+
+function runDesktopGuided(main, steps, labId){
+  let idx = 0;
+  function paint(){
+    if(idx >= steps.length){
+      main.innerHTML = "<div class=\"guided-step\"><span style=\"color:var(--good);font-family:'JetBrains Mono',monospace;\">\u2713 Diagnosis complete.</span></div>";
+      markLabComplete("desk-"+labId);
+      renderDesktopRoot();
+      return;
+    }
+    const step = steps[idx];
+    main.innerHTML =
+      "<div class=\"guided-step\">"+
+        "<div class=\"gs-prompt\">"+escapeHtml(step.prompt)+"</div>"+
+        "<div class=\"gs-opts\">"+step.options.map((o,oi)=>"<button class=\"gs-opt\" data-oi=\""+oi+"\">"+o.text+"</button>").join("")+"</div>"+
+        "<div class=\"gs-fb\" id=\"desk-gs-fb\"></div>"+
+      "</div>";
+    main.querySelectorAll(".gs-opt").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const oi = parseInt(btn.dataset.oi,10);
+        const opt = step.options[oi];
+        const fb = document.getElementById("desk-gs-fb");
+        fb.textContent = opt.feedback;
+        fb.className = "gs-fb show "+(opt.correct?"ok":"no");
+        main.querySelectorAll(".gs-opt").forEach(b=>b.disabled=true);
+        const nextBtn = document.createElement("button");
+        nextBtn.className = "btn"+(opt.correct?"":" ghost");
+        nextBtn.style.marginTop = "12px";
+        nextBtn.textContent = opt.correct ? (idx<steps.length-1?"Next \u2192":"Finish") : "Try again";
+        nextBtn.addEventListener("click", ()=>{ if(opt.correct) idx++; paint(); });
+        main.querySelector(".guided-step").appendChild(nextBtn);
+      });
+    });
+  }
+  paint();
+}
+
 
 /* ---------------- INIT ---------------- */
 renderDomainWeights();
@@ -1480,6 +2774,13 @@ renderCourse();
 renderLengthCards();
 renderHistory();
 renderLabPicker();
+renderCatalog();
+renderLessons();
+renderScenarioPicker();
+renderDesktopRoot();
+renderModePicker();
+renderProgressSummary();
+renderWeakTopics();
 </script>
 </body>
 </html>
